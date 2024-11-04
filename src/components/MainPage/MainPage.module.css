@@ -1,0 +1,49 @@
+.mainPageHead {
+    background-image: url("../../assets/main/top.jpg");
+    background-size: cover;
+    background-position: center -86.21px;
+    color: #fff;
+    text-align: center;
+    padding: 114px 40px 159px 40px;
+    line-height: 1;
+}
+
+.title {
+    font-family: "Tenor Sans";
+    font-size: 96px;
+}
+
+.subtitle {
+    font-family: "GrtskExa Light";
+    font-size: 24px;
+    margin: 0 auto;
+    margin-top: 24px;
+    max-width: 1000px;
+}
+
+@media (max-width: 768px) {
+    .mainPageHead {
+        padding: 64px 20px 70px 20px;
+    }
+    .title {
+        font-size: 52px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 495px) {
+    .mainPageHead {
+        padding: 16px 10px 32px 10px;
+    }
+    .title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+        margin-top: 16px;
+    }
+}
