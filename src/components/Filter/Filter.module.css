@@ -1,0 +1,36 @@
+.filter {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 100px;
+}
+
+.left {
+    display: flex;
+    gap: 20px;
+    justify-content: space-around;
+}
+
+.title {
+    font-family: "GrtskExa Light";
+    font-size: 18px;
+    color: #424242;
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 1270px) {
+    .filter {
+        display: flex;
+        flex-direction: column;
+        margin: 32px 60px;
+    }
+}
+
+@media (max-width: 900px) {
+    .title{
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+}
+@media (max-width: 495px) {
+}
