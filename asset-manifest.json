@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/coworking/static/css/main.d4ff6842.css",
-    "main.js": "/coworking/static/js/main.80b4ba08.js",
+    "main.css": "/coworking/static/css/main.317e3c2a.css",
+    "main.js": "/coworking/static/js/main.a5b37854.js",
     "static/media/top.jpg": "/coworking/static/media/top.3fe7d1ad49c8c2c0fdea.jpg",
     "static/media/GrtskTera-Semibold.ttf": "/coworking/static/media/GrtskTera-Semibold.77d66e49022e66538dd6.ttf",
     "static/media/GrtskExa-Medium.ttf": "/coworking/static/media/GrtskExa-Medium.7552a500ff4d2f66f565.ttf",
@@ -11,11 +11,12 @@
     "static/media/GrtskExa-Regular.ttf": "/coworking/static/media/GrtskExa-Regular.39bf07e3b44a5ee40204.ttf",
     "static/media/IconRingNotification.svg": "/coworking/static/media/IconRingNotification.c6f33c1edbf7d8a43798819acd1ff337.svg",
     "index.html": "/coworking/index.html",
-    "main.d4ff6842.css.map": "/coworking/static/css/main.d4ff6842.css.map",
-    "main.80b4ba08.js.map": "/coworking/static/js/main.80b4ba08.js.map"
+    "static/media/arrow.svg": "/coworking/static/media/arrow.1d34c38e431bdc3f080b.svg",
+    "main.317e3c2a.css.map": "/coworking/static/css/main.317e3c2a.css.map",
+    "main.a5b37854.js.map": "/coworking/static/js/main.a5b37854.js.map"
   },
   "entrypoints": [
-    "static/css/main.d4ff6842.css",
-    "static/js/main.80b4ba08.js"
+    "static/css/main.317e3c2a.css",
+    "static/js/main.a5b37854.js"
   ]
 }
