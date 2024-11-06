@@ -9,7 +9,7 @@ import MySelect from "../UI/Select/MySelect";
 import cl from "./Filter.module.css";
 
 const Filter = () => {
-    const [address, setAddress] = useState();
+    // const [address, setAddress] = useState();
     const [data, setData] = useState();
     const [time, setTime] = useState();
     const [capacity, setCapacity] = useState();
@@ -27,7 +27,7 @@ const Filter = () => {
     return (
         <div className={cl.filter}>
             <div className={cl.left}>
-                <div className={cl.container}>
+                {/* <div className={cl.container}>
                     <p className={cl.title}>Адрес</p>
                     <MySelect
                         value={address}
@@ -38,7 +38,7 @@ const Filter = () => {
                             { value: 66, name: "Ленина, 66" },
                         ]}
                     />
-                </div>
+                </div> */}
 
                 <div className={cl.container}>
                     <p className={cl.title}>Дата</p>

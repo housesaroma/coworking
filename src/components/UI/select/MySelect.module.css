@@ -14,11 +14,19 @@
     background-size: 20px; /* Размер стрелочки */
 }
 
-@media (max-width: 900px) {
+@media (max-width: 920px) {
     .mySelect {
         padding: 16px;
         font-size: 14px;
+        background-position: right 16px center;
+        background-size: 16px;
     }
 }
 @media (max-width: 495px) {
+    .mySelect {
+        /* padding: 8px;
+        font-size: 10px;
+        background-position: right 8px center;
+        background-size: 12px;  */
+    }
 }
