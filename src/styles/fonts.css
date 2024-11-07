@@ -4,23 +4,23 @@
 }
 
 @font-face {
-    font-family: "GrtskExa Medium";
-    src: url("../fonts/GrtskExa-Medium.ttf") format("truetype");
-}
-
-@font-face {
     font-family: "GrtskExa Regular";
     src: url("../fonts/GrtskExa-Regular.ttf") format("truetype");
 }
 
 @font-face {
-    font-family: "GrtskMega Bold";
-    src: url("../fonts/GrtskMega-Bold.ttf") format("truetype");
+    font-family: "GrtskExa Medium";
+    src: url("../fonts/GrtskExa-Medium.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "GrtskTera Semibold";
     src: url("../fonts/GrtskTera-Semibold.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "GrtskMega Bold";
+    src: url("../fonts/GrtskMega-Bold.ttf") format("truetype");
 }
 
 @font-face {

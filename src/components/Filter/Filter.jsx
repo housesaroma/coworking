@@ -8,7 +8,7 @@ import MyButton from "../UI/Button/MyButton";
 import MySelect from "../UI/Select/MySelect";
 import cl from "./Filter.module.css";
 
-const Filter = () => {
+const Filter = ({ onCapacityChange }) => {
     // const [address, setAddress] = useState();
     const [data, setData] = useState();
     const [time, setTime] = useState();
@@ -23,6 +23,12 @@ const Filter = () => {
         setTimeOptions(generateTimeOptions());
         setCapacityOptions(generateCapacityOptions());
     }, []);
+
+    const handleSearch = () => {
+        if (onCapacityChange) {
+            onCapacityChange(capacity);
+        }
+    };
 
     return (
         <div className={cl.filter}>
@@ -70,7 +76,7 @@ const Filter = () => {
                     />
                 </div>
             </div>
-            <MyButton>Поиск</MyButton>
+            <MyButton onClick={handleSearch}>Поиск</MyButton>
         </div>
     );
 };

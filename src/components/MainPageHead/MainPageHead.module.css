@@ -19,6 +19,9 @@
     margin: 0 auto;
     margin-top: 24px;
     max-width: 1000px;
+    background-color: rgba(204, 204, 204, 0.3);
+    padding: 10px;
+    border-radius: 10px;
 }
 
 @media (max-width: 768px) {

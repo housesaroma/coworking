@@ -31,7 +31,7 @@ export const generateTimeOptions = () => {
 
 export const generateCapacityOptions = () => {
     const options = [];
-    const maxCapacity = 25; // Максимальное количество людей
+    const maxCapacity = 30; // Максимальное количество людей
 
     for (let i = 1; i <= maxCapacity; i++) {
         const capacityString = `${i} чел.`;

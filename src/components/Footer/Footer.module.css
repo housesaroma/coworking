@@ -47,7 +47,7 @@ hr {
 @media (max-width: 495px) {
     .footer {
         padding: 15px 20px;
-        font-size: 8px;
-        line-height: 8px;
+        font-size: 10px;
+        line-height: 1;
     }
 }

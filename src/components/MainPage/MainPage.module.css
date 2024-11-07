@@ -1,0 +1,20 @@
+.title {
+    font-family: "Tenor Sans";
+    font-size: clamp(1.75rem, 0.597rem + 4.92vw, 6.5rem);
+    color: #424242;
+    font-weight: normal;
+    margin-left: 100px;
+    width: 607px;
+}
+
+@media (max-width: 1080px) {
+    .title {
+        margin-left: 80px;
+    }
+}
+
+@media (max-width: 620px) {
+    .title {
+        margin-left: 60px;
+    }
+}

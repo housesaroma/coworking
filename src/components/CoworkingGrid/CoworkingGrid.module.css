@@ -1,0 +1,23 @@
+/* CoworkingGrid.module.css */
+.grid {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 80px 100px;
+    padding-top: 64px;
+}
+
+@media (max-width: 1080px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 60px 80px;
+    }
+}
+
+@media (max-width: 620px) {
+    .grid {
+        grid-template-columns: 1fr;
+        padding: 40px 60px;
+    }
+}
