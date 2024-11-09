@@ -4,6 +4,7 @@ import Filter from "../../components/Filter/Filter";
 import MainPageHead from "../../components/MainPageHead/MainPageHead";
 import cl from "./MainPage.module.css";
 import CoworkingAdvantages from "../../components/CoworkingAdvantages/CoworkingAdvantages";
+import Map from "../../components/Map/Map";
 
 const MainPage = () => {
     const [selectedCapacity, setSelectedCapacity] = useState(null);
@@ -16,6 +17,7 @@ const MainPage = () => {
                 <h2 className={cl.title}>Выбрать коворкинг</h2>
                 <CoworkingCards selectedCapacity={selectedCapacity} />
                 <CoworkingAdvantages />
+                <Map/>
             </section>
         </div>
     );
