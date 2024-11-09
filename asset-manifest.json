@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/coworking/static/css/main.1c150aa7.css",
-    "main.js": "/coworking/static/js/main.910bebd8.js",
+    "main.css": "/coworking/static/css/main.7fc95df6.css",
+    "main.js": "/coworking/static/js/main.02607929.js",
+    "static/media/bottom.jpg": "/coworking/static/media/bottom.d290874758f7ea761b19.jpg",
     "static/media/top.jpg": "/coworking/static/media/top.3fe7d1ad49c8c2c0fdea.jpg",
     "static/media/card1.jpg": "/coworking/static/media/card1.e14a4778de14e7b98563.jpg",
     "static/media/card2.jpg": "/coworking/static/media/card2.1e33b8b0578740d3b480.jpg",
@@ -13,14 +14,14 @@
     "static/media/GrtskMega-Bold.ttf": "/coworking/static/media/GrtskMega-Bold.a92c0f55ef0b13e0ec02.ttf",
     "static/media/GrtskExa-Regular.ttf": "/coworking/static/media/GrtskExa-Regular.39bf07e3b44a5ee40204.ttf",
     "static/media/card4.jpg": "/coworking/static/media/card4.bfb95b590922c14973d9.jpg",
-    "static/media/IconRingNotification.svg": "/coworking/static/media/IconRingNotification.c6f33c1edbf7d8a43798819acd1ff337.svg",
+    "static/media/IconRingNotification.svg": "/coworking/static/media/IconRingNotification.5816d31986d6e0a8163f7d18c40d53d5.svg",
     "index.html": "/coworking/index.html",
-    "static/media/arrow.svg": "/coworking/static/media/arrow.5ffdcda44b2e51ebd625.svg",
-    "main.1c150aa7.css.map": "/coworking/static/css/main.1c150aa7.css.map",
-    "main.910bebd8.js.map": "/coworking/static/js/main.910bebd8.js.map"
+    "static/media/arrow.svg": "/coworking/static/media/arrow.1d34c38e431bdc3f080b.svg",
+    "main.7fc95df6.css.map": "/coworking/static/css/main.7fc95df6.css.map",
+    "main.02607929.js.map": "/coworking/static/js/main.02607929.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c150aa7.css",
-    "static/js/main.910bebd8.js"
+    "static/css/main.7fc95df6.css",
+    "static/js/main.02607929.js"
   ]
 }
