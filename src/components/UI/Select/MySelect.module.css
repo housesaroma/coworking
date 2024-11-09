@@ -1,6 +1,7 @@
 .mySelect {
     border-radius: 50px;
     padding: 24px;
+    padding-right: 48px;
     background: #f2f2f2;
     font-family: "GrtskExa Light";
     font-size: 18px;
@@ -8,7 +9,7 @@
     -webkit-appearance: none; /* Убираем стандартную стрелочку в WebKit-браузерах */
     -moz-appearance: none; /* Убираем стандартную стрелочку в Firefox */
     appearance: none; /* Убираем стандартную стрелочку в современных браузерах */
-    background-image: url("/src/assets/arrow.svg"); /* Путь к вашей кастомной стрелочке */
+    background-image: url("/src/assets/icons/arrow.svg"); /* Путь к вашей кастомной стрелочке */
     background-repeat: no-repeat;
     background-position: right 24px center; /* Смещение стрелочки */
     background-size: 20px; /* Размер стрелочки */
@@ -22,11 +23,11 @@
         background-size: 16px;
     }
 }
-@media (max-width: 495px) {
+/* @media (max-width: 495px) {
     .mySelect {
-        /* padding: 8px;
+        padding: 8px;
         font-size: 10px;
         background-position: right 8px center;
-        background-size: 12px;  */
+        background-size: 12px; 
     }
-}
+} */

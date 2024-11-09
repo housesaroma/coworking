@@ -18,7 +18,7 @@
     margin-bottom: 16px;
 }
 
-@media (max-width: 1080px) {
+@media (max-width: 1120px) {
     .filter {
         display: flex;
         flex-direction: column;
@@ -47,10 +47,10 @@
 }
 
 @media (max-width: 495px) {
-    .title{
-        /* font-size: 10px;
-        margin-bottom: 6px; */
-    }
+    /* .title{
+        font-size: 10px;
+        margin-bottom: 6px;
+    } */
     .filter{
         flex-direction: column;
         align-items: center;

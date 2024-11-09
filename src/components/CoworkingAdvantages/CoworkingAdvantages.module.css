@@ -1,0 +1,55 @@
+.coworkingAdvantages {
+    background-image: url("../../assets/main/bottom.jpg");
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    padding: 130px 100px;
+    line-height: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 100px;
+}
+
+.right {
+    width: auto;
+    align-self: flex-end;
+}
+
+.title {
+    font-family: "Tenor Sans";
+    font-size: clamp(1.625rem, 0.563rem + 4.53vw, 6rem);
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    font-family: "GrtskExa Light";
+    font-size: clamp(0.625rem, 0.413rem + 0.91vw, 1.5rem);
+    width: 600px;
+}
+
+@media (max-width: 768px) {
+    .coworkingAdvantages {
+        padding: 60px;
+    }
+    /* .title {
+        font-size: 52px;
+    }
+
+    .subtitle {
+        font-size: 18px;
+    } */
+}
+
+@media (max-width: 495px) {
+    .coworkingAdvantages {
+        padding: 32px 20px;
+    }
+    /* .title {
+        font-size: 28px;
+    }
+
+    .subtitle {
+        font-size: 10px;
+        margin-top: 16px;
+    } */
+}

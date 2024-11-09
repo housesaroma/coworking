@@ -1,6 +1,6 @@
 import React from "react";
-import avatar from "../../assets/header/Avatar.jpg";
-import notification from "../../assets/header/IconRingNotification.svg";
+import avatar from "../../assets/icons/header/Avatar.jpg";
+import notification from "../../assets/icons/header/IconRingNotification.svg";
 import cl from "./Header.module.css";
 
 const Header = ({ title }) => {
