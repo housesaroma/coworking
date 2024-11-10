@@ -9,7 +9,7 @@ const Map = () => {
                 width="100%"
                 frameborder="1"
                 allowfullscreen="true"
-                style={{ position: "relative", aspectRatio: 3/1 }}
+                style={{ position: "relative", aspectRatio: 19/11 }}
             ></iframe>
         </div>
     );
