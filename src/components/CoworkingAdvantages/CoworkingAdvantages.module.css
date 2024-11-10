@@ -24,7 +24,7 @@
 .subtitle {
     font-family: "GrtskExa Light";
     font-size: clamp(0.625rem, 0.413rem + 0.91vw, 1.5rem);
-    width: 600px;
+    width: 50vw;
 }
 
 @media (max-width: 768px) {
