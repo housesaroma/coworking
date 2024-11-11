@@ -9,15 +9,7 @@
     background: #424242;
     cursor: pointer;
     margin-left: 24px;
-}
-
-@media (max-width: 1270px) {
-    .myBtn {
-        display: flex;
-        margin-top: 24px;
-        margin-left: 0;
-        align-self: flex-end;
-    }
+    align-self: flex-end;
 }
 
 @media (max-width: 920px) {

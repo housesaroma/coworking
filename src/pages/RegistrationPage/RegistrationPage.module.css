@@ -1,0 +1,51 @@
+.background {
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
+    padding: 110px 50px;
+}
+
+.container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 140px 100px;
+    background-color: #fff;
+    border-radius: 50px;
+    box-shadow: 0px 4px 16px 0px #14191a14;
+}
+
+.title {
+    font-family: "Tenor Sans";
+    font-size: 96px;
+    font-weight: normal;
+    text-align: center;
+    margin-bottom: 80px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.note {
+    font-family: "GrtskExa Light";
+    text-align: center;
+    font-size: 24px;
+    width: 30vw;
+    margin: 0 auto;
+    margin-top: 80px;
+}
+
+.passwordContainer {
+    position: relative;
+    display: flex;
+}
+
+.eyeIcon {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}

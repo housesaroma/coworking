@@ -1,15 +1,34 @@
-import Footer from "./components/Footer/Footer";
-import Header from "./components/Header/Header";
-import MainPage from "./pages/MainPage/MainPage";
+import { useEffect, useState } from "react";
+import { BrowserRouter } from "react-router-dom";
+import AppRouter from "./components/AppRouter";
+import { AuthContext } from "./components/context";
 import "./styles/App.css";
 import "./styles/fonts.css";
 
 function App() {
+    const [isAuth, setIsAuth] = useState(false);
+    const [isLoading, setLoading] = useState(true);
+
+    useEffect(() => {
+        if (localStorage.getItem("auth")) {
+            setIsAuth(true);
+        }
+        setLoading(false);
+    }, []);
+
     return (
-        <div className="App">
-            <Header title={"Главная"} />
-            <MainPage/>
-            <Footer />
+        <div>
+            <AuthContext.Provider
+                value={{
+                    isAuth,
+                    setIsAuth,
+                    isLoading,
+                }}
+            >
+                <BrowserRouter>
+                    <AppRouter />
+                </BrowserRouter>
+            </AuthContext.Provider>
         </div>
     );
 }
