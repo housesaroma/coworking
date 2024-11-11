@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/coworking/static/css/main.1c150aa7.css",
-    "main.js": "/coworking/static/js/main.910bebd8.js",
+    "main.css": "/coworking/static/css/main.a7e85074.css",
+    "main.js": "/coworking/static/js/main.46a48d9e.js",
+    "static/media/bottom.jpg": "/coworking/static/media/bottom.d290874758f7ea761b19.jpg",
     "static/media/top.jpg": "/coworking/static/media/top.3fe7d1ad49c8c2c0fdea.jpg",
     "static/media/card1.jpg": "/coworking/static/media/card1.e14a4778de14e7b98563.jpg",
     "static/media/card2.jpg": "/coworking/static/media/card2.1e33b8b0578740d3b480.jpg",
@@ -16,11 +17,11 @@
     "static/media/IconRingNotification.svg": "/coworking/static/media/IconRingNotification.c6f33c1edbf7d8a43798819acd1ff337.svg",
     "index.html": "/coworking/index.html",
     "static/media/arrow.svg": "/coworking/static/media/arrow.5ffdcda44b2e51ebd625.svg",
-    "main.1c150aa7.css.map": "/coworking/static/css/main.1c150aa7.css.map",
-    "main.910bebd8.js.map": "/coworking/static/js/main.910bebd8.js.map"
+    "main.a7e85074.css.map": "/coworking/static/css/main.a7e85074.css.map",
+    "main.46a48d9e.js.map": "/coworking/static/js/main.46a48d9e.js.map"
   },
   "entrypoints": [
-    "static/css/main.1c150aa7.css",
-    "static/js/main.910bebd8.js"
+    "static/css/main.a7e85074.css",
+    "static/js/main.46a48d9e.js"
   ]
 }
