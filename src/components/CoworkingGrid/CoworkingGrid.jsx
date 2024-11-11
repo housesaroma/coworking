@@ -6,7 +6,7 @@ import card4 from "../../assets/cards/card4.jpg";
 import CoworkingCard from "../CoworkingCard/CoworkingCard";
 import cl from "./CoworkingGrid.module.css";
 
-const CoworkingCards = ({ selectedCapacity }) => {
+const CoworkingGrid = ({ selectedCapacity }) => {
     const coworkingSpaces = [
         { src: card1, title: "Территория идей", places: 15 },
         { src: card2, title: "Территория столов", places: 30 },
@@ -32,4 +32,4 @@ const CoworkingCards = ({ selectedCapacity }) => {
     );
 };
 
-export default CoworkingCards;
+export default CoworkingGrid;

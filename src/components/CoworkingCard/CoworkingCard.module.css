@@ -22,7 +22,7 @@
     background-color: rgba(0, 0, 0, 0.5);
     color: white;
     padding: 32px;
-    opacity: 1;
+    opacity: 0;
     transition: opacity 0.5s ease;
     display: flex;
     flex-direction: column;
