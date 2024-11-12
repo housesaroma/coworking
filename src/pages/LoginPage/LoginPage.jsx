@@ -7,7 +7,7 @@ import cl from "./LoginPage.module.css";
 import { Navigate } from "react-router-dom";
 
 const LoginPage = () => {
-    const { isAuth, setIsAuth } = useContext(AuthContext);
+    const { setIsAuth } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [redirectToRegister, setRedirectToRegister] = useState(false);
 

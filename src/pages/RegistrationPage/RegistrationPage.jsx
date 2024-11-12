@@ -6,7 +6,7 @@ import MyInput from "../../components/UI/Input/MyInput";
 import cl from "./RegistrationPage.module.css";
 
 const RegistrationPage = () => {
-    const { isAuth, setIsAuth } = useContext(AuthContext);
+    const { setIsAuth } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
 
     const login = (event) => {

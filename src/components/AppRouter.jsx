@@ -11,27 +11,27 @@ const AppRouter = () => {
         return <Loader />;
     }
 
-    return isAuth ? (
+    return (
         <Routes>
-            {privateRoutes.map((route) => (
-                <Route
-                    element={<route.component />}
-                    path={route.path}
-                    key={route.path}
-                />
-            ))}
-            <Route path="*" element={<Navigate to="/main" />}></Route>
-        </Routes>
-    ) : (
-        <Routes>
-            {publicRoutes.map((route) => (
-                <Route
-                    element={<route.component />}
-                    path={route.path}
-                    key={route.path}
-                />
-            ))}
-            <Route path="*" element={<Navigate to="/login" />}></Route>
+            {isAuth
+                ? privateRoutes.map((route) => (
+                      <Route
+                          element={<route.component />}
+                          path={route.path}
+                          key={route.path}
+                      />
+                  ))
+                : publicRoutes.map((route) => (
+                      <Route
+                          element={<route.component />}
+                          path={route.path}
+                          key={route.path}
+                      />
+                  ))}
+            <Route
+                path="*"
+                element={<Navigate to={isAuth ? "/main" : "/login"} />}
+            />
         </Routes>
     );
 };

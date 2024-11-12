@@ -5,7 +5,7 @@ import { AuthContext } from "../context";
 import cl from "./Header.module.css";
 
 const Header = ({ title }) => {
-    const { isAuth, setIsAuth } = useContext(AuthContext);
+    const { setIsAuth } = useContext(AuthContext);
 
     const logout = () => {
         setIsAuth(false);
