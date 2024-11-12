@@ -31,7 +31,7 @@ const AppRouter = () => {
                     key={route.path}
                 />
             ))}
-            <Route path="*" element={<Navigate to="/registration" />}></Route>
+            <Route path="*" element={<Navigate to="/login" />}></Route>
         </Routes>
     );
 };

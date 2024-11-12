@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import avatar from "../../assets/icons/header/Avatar.jpg";
 import notification from "../../assets/icons/header/IconRingNotification.svg";
-import cl from "./Header.module.css";
-import MyButton from "../UI/Button/MyButton";
 import { AuthContext } from "../context";
+import cl from "./Header.module.css";
 
 const Header = ({ title }) => {
     const { isAuth, setIsAuth } = useContext(AuthContext);
