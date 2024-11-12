@@ -29,7 +29,7 @@ const Header = ({ title }) => {
                             alt="notification"
                         />
                     </a>
-                    <a href="!#" onClick={logout}>
+                    <a href onClick={logout}>
                         <img
                             className={cl.avatar}
                             src={avatar}

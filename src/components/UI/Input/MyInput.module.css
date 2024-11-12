@@ -8,3 +8,10 @@
     border-radius: 50px;
     border: 1px solid #ccc;
 }
+
+@media (max-width: 768px) {
+    .myInput {
+        padding: 16px;
+        font-size: 14px;
+    }
+}

@@ -39,17 +39,12 @@
 @media (max-width: 660px) {
     .left {
         flex-direction: column;
+        margin: 0;
     }
 
     .filter {
         flex-direction: row;
         align-items: center;
-    }
-}
-
-@media (max-width: 595px) {
-    .left {
-        margin: 0px;
     }
 }
 

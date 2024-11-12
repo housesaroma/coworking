@@ -50,7 +50,7 @@
 
 @media (max-width: 768px) {
     .left {
-        font-size: 12px;
+        font-size: clamp(0.625rem, 0.398rem + 0.73vw, 0.75rem);
         padding: 16px 24px;
     }
     .right {

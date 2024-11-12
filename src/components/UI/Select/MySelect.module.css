@@ -23,11 +23,8 @@
         background-size: 16px;
     }
 }
-/* @media (max-width: 495px) {
+@media (max-width: 660px) {
     .mySelect {
-        padding: 8px;
-        font-size: 10px;
-        background-position: right 8px center;
-        background-size: 12px; 
+        width: 100%;
     }
-} */
+}
