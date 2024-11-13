@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { HashRouter } from "react-router-dom";
 import AppRouter from "./components/AppRouter";
 import { AuthContext } from "./components/context";
 import "./styles/App.css";
@@ -25,9 +25,9 @@ function App() {
                     isLoading,
                 }}
             >
-                <BrowserRouter>
+                <HashRouter>
                     <AppRouter />
-                </BrowserRouter>
+                </HashRouter>
             </AuthContext.Provider>
         </div>
     );
