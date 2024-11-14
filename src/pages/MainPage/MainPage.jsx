@@ -13,7 +13,7 @@ const MainPage = () => {
 
     return (
         <div>
-            <Header title={"Главная"} />
+            <Header title={"Главная"} showIcons={true} />
             <MainPageHead />
             <section className={cl.mainPage}>
                 <Filter onCapacityChange={setSelectedCapacity} />

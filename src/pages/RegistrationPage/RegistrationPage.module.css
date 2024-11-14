@@ -1,6 +1,7 @@
 .background {
     background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 100%);
     padding: 110px 50px;
+    min-height: 100vh;
 }
 
 @media (max-width: 768px) {

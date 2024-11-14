@@ -27,14 +27,15 @@ const LoginPage = () => {
 
     return (
         <div className={cl.loginPage}>
-            <Header title="Вход" />
+            <Header title="Вход" showIcons={false}/>
             <div className={cl.background}>
                 <div className={cl.container}>
                     <h1 className={cl.title}>Вход</h1>
                     <form onSubmit={login} className={cl.form}>
                         <MyInput
                             type="email"
-                            placeholder="Электронная почта с доменом @urfu.me"
+                            placeholder="Электронная почта @urfu.me"
+                            title="Только для сотрудников и студентов УрФУ"
                         />
                         <div className={cl.passwordContainer}>
                             <MyInput

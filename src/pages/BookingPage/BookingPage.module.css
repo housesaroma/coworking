@@ -1,0 +1,103 @@
+.title {
+    font-family: "Tenor Sans";
+    font-size: clamp(1.75rem, 0.597rem + 4.92vw, 6.5rem);
+    color: #424242;
+    font-weight: normal;
+    margin-left: 100px;
+    margin-bottom: 80px;
+}
+
+@media (max-width: 1080px) {
+    .title {
+        margin-left: 80px;
+        margin-bottom: 32px;
+    }
+}
+
+@media (max-width: 620px) {
+    .title {
+        margin-left: 60px;
+    }
+}
+
+.buttonsGroup {
+    display: flex;
+    margin: 80px 100px;
+    gap: 20px;
+    width: 70vw;
+}
+
+@media (max-width: 1120px) {
+    .buttonsGroup {
+        margin: 32px 100px;
+    }
+}
+
+.cardContainer {
+    height: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    padding: 80px 100px;
+    padding-top: 64px;
+}
+
+@media (max-width: 1080px) {
+    .cardContainer {
+        grid-template-columns: repeat(2, 1fr);
+        padding: 60px 80px;
+    }
+}
+
+@media (max-width: 620px) {
+    .cardContainer {
+        grid-template-columns: 1fr;
+        padding: 40px 60px;
+    }
+}
+
+.accordion {
+    font-family: "GrtskExa Light";
+    font-size: 24px;
+    line-height: 1;
+}
+
+.accordionItem {
+    cursor: pointer;
+    padding: 24px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+    border-radius: 50px;
+    background: #f2f2f2;
+    margin: 80px 100px;
+
+    -webkit-appearance: none; /* Убираем стандартную стрелочку в WebKit-браузерах */
+    -moz-appearance: none; /* Убираем стандартную стрелочку в Firefox */
+    appearance: none; /* Убираем стандартную стрелочку в современных браузерах */
+    background-image: url("/src/assets/icons/arrow.svg"); /* Путь к вашей кастомной стрелочке */
+    background-repeat: no-repeat;
+    background-position: center right 24px; /* Смещение стрелочки */
+    background-size: 20px; /* Размер стрелочки */
+}
+
+@media (max-width: 920px) {
+    .accordionItem {
+        background-position: right 16px;
+        background-size: 16px;
+    }
+}
+
+.accordionItem:hover {
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 1120px) {
+    .accordionItem {
+        margin: 32px 100px;
+    }
+}
+
+.exitBtn {
+    margin-left: 80px;
+    margin-bottom: 100px;
+}

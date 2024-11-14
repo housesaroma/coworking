@@ -21,7 +21,7 @@ const RegistrationPage = () => {
 
     return (
         <div className={cl.registrationPage}>
-            <Header title="Регистрация" />
+            <Header title="Регистрация" showIcons={false} />
             <div className={cl.background}>
                 <div className={cl.container}>
                     <h1 className={cl.title}>Регистрация</h1>
@@ -31,7 +31,8 @@ const RegistrationPage = () => {
                         <MyInput type="text" placeholder="Отчество" />
                         <MyInput
                             type="email"
-                            placeholder="Электронная почта с доменом @urfu.me"
+                            placeholder="Электронная почта @urfu.me"
+                            title="Только для сотрудников и студентов УрФУ"
                         />
                         <div className={cl.passwordContainer}>
                             <MyInput
