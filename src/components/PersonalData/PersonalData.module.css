@@ -1,0 +1,55 @@
+.title {
+    font-family: "Tenor Sans";
+    font-size: clamp(1.75rem, 0.597rem + 4.92vw, 6.5rem);
+    color: #424242;
+    font-weight: normal;
+    margin: 80px 100px;
+}
+
+.edit {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+.form {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    gap: 40px;
+}
+
+.formGroup {
+    width: 100%;
+}
+
+.avatar {
+    margin-right: 100px;
+    width: 50vw;
+}
+
+@media (max-width: 1120px) {
+    .avatar {
+        margin-right: 80px;
+    }
+    .title {
+        margin: 32px 80px;
+    }
+}
+
+@media (max-width: 620px) {
+    .form {
+        flex-direction: column;
+    }
+    .avatar {
+        margin-left: 32px;
+        order: -1;
+    }
+    .title {
+        margin: 32px;
+    }
+}

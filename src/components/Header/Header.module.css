@@ -50,10 +50,12 @@
 
 @media (max-width: 768px) {
     .left {
+        gap: 16px;
         font-size: clamp(0.625rem, 0.398rem + 0.73vw, 0.75rem);
         padding: 26px 24px;
     }
     .right {
+        gap: 16px;
         padding: 16px 24px;
         .notification {
             width: 26px;
@@ -67,10 +69,12 @@
 }
 @media (max-width: 495px) {
     .left {
+        gap: 12px;
         font-size: 10px;
         padding: 10px 12px;
     }
     .right {
+        gap: 12px;
         padding: 8px 12px;
         .notification {
             width: 12px;
@@ -83,6 +87,13 @@
     }
 }
 
-.avatar, .logo{
+@media (max-width: 420px) {
+    .left {
+        font-size: 8px;
+    }
+}
+
+.avatar,
+.logo {
     cursor: pointer;
 }

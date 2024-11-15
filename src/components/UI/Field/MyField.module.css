@@ -1,0 +1,48 @@
+.myInput {
+    width: 100%;
+    padding: 24px;
+    background: #f2f2f2;
+    font-size: 24px;
+    line-height: 1;
+    font-weight: "GrtskExa Light";
+    border-radius: 50px;
+    border: 1px solid #ccc;
+    position: relative;
+}
+
+.fieldContainer {
+    position: relative;
+    margin: 24px 100px;
+    margin-right: 0;
+}
+
+.pencil {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+}
+
+@media (max-width: 1120px) {
+    .fieldContainer {
+        margin: 32px 80px;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 920px) {
+    .myInput {
+        padding: 24px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 620px) {
+    .fieldContainer {
+        margin: 32px;
+    }
+}

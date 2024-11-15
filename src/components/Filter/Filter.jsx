@@ -51,7 +51,7 @@ const Filter = ({ onCapacityChange }) => {
                     <MySelect
                         value={data}
                         onChange={(value) => setData(value)}
-                        defaultValue="Выберите адрес"
+                        defaultValue="Выберите дату"
                         options={dataOptions}
                     />
                 </div>
