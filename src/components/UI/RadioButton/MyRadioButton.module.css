@@ -24,8 +24,9 @@
 }
 @media (max-width: 495px) {
     .myBtn {
-        /* padding: 8px 28px; */
+        padding: 8px 28px;
         margin: 0;
         align-self: center;
+        width: 100%;
     }
 }

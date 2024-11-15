@@ -9,6 +9,7 @@ import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyRadioButton from "../../components/UI/RadioButton/MyRadioButton";
 import cl from "./BookingPage.module.css";
+import arrow from "../../assets/icons/arrow.svg";
 
 export const BookingPage = () => {
     const { setIsAuth } = useContext(AuthContext);
@@ -67,7 +68,16 @@ export const BookingPage = () => {
                         className={cl.accordionItem}
                         onClick={() => toggleSection(section)}
                     >
-                        {section}
+                        <div className={cl.accordionHeader}>
+                            {section}
+                            <img
+                                src={arrow}
+                                alt="arrow"
+                                width={"20px"}
+                                height={"20px"}
+                                className={cl.arrow}
+                            ></img>
+                        </div>
                         {expandedSection === section && (
                             <div className={cl.cardContainer}>
                                 {coworkingSpaces.map((space, index) => (
