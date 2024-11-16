@@ -1,4 +1,5 @@
 import React from "react";
+import cl from "./Map.module.css";
 
 const Map = () => {
     return (
@@ -9,7 +10,7 @@ const Map = () => {
                 width="100%"
                 frameborder="1"
                 allowfullscreen="true"
-                style={{ position: "relative", aspectRatio: 19/11 }}
+                className={cl.map}
             ></iframe>
         </div>
     );

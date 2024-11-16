@@ -1,0 +1,10 @@
+.map {
+    position: "relative";
+    aspect-ratio: 19/5;
+}
+
+@media (max-width: 768px) {
+    .map {
+        aspect-ratio: 19/11;
+    }
+}

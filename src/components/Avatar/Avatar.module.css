@@ -21,7 +21,6 @@
     right: 0;
     color: white;
     padding: 32px;
-    opacity: 0;
     transition: opacity 0.5s ease;
     display: flex;
     flex-direction: column;
@@ -50,7 +49,6 @@
 
 @media (max-width: 1080px) {
     .overlay {
-        opacity: 1;
         padding: 28px;
     }
     .button {

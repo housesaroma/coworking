@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import avatar from "../../assets/obabkov.jpg";
 import Avatar from "../Avatar/Avatar";
 import MyField from "../UI/Field/MyField";
+import MyRadioButton from "../UI/RadioButton/MyRadioButton";
 import cl from "./PersonalData.module.css";
 
 const PersonalData = () => {
@@ -13,12 +14,22 @@ const PersonalData = () => {
         password: "qwerty123",
     });
 
+    const [hasChanges, setHasChanges] = useState(false);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setData({
-            ...data,
-            [name]: value,
+        setData((prevData) => {
+            const newData = { ...prevData, [name]: value };
+            setHasChanges(JSON.stringify(newData) !== JSON.stringify(prevData));
+            return newData;
         });
+    };
+
+    const handleSave = () => {
+        if (hasChanges) {
+            console.log("Changes saved!");
+            setHasChanges(false);
+        }
     };
 
     return (
@@ -35,12 +46,18 @@ const PersonalData = () => {
                             onChange={handleChange}
                         />
                     ))}
+                    <div className={cl.save}>
+                        <MyRadioButton
+                            isSelected={hasChanges}
+                            onClick={handleSave}
+                        >
+                            Сохранить
+                        </MyRadioButton>
+                    </div>
                 </div>
                 <div className={cl.avatar}>
-                <Avatar
-                    key={1}
-                    src={avatar}
-                /></div>
+                    <Avatar key={1} src={avatar} />
+                </div>
             </div>
         </div>
     );
