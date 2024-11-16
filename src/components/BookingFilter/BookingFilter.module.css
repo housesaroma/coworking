@@ -1,0 +1,63 @@
+.filter {
+    display: flex;
+    justify-content: space-between;
+    margin: 80px 100px;
+}
+
+.left {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+}
+
+.title {
+    font-family: "GrtskExa Light";
+    font-size: 18px;
+    color: #424242;
+    line-height: 1;
+    margin-bottom: 16px;
+}
+
+@media (max-width: 1120px) {
+    .filter {
+        display: flex;
+        flex-direction: column;
+        margin: 32px 100px;
+    }
+    .left {
+        margin-bottom: 24px;
+    }
+}
+
+@media (max-width: 920px) {
+    .title {
+        font-size: 14px;
+        margin-bottom: 6px;
+    }
+}
+
+@media (max-width: 660px) {
+    .left {
+        flex-direction: column;
+        margin: 0;
+    }
+
+    .filter {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+@media (max-width: 495px) {
+    /* .title{
+        font-size: 10px;
+        margin-bottom: 6px;
+    } */
+    .left {
+        margin-bottom: 24px;
+    }
+    .filter {
+        flex-direction: column;
+        align-items: center;
+    }
+}

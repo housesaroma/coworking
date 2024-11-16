@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import CoworkingAdvantages from "../../components/CoworkingAdvantages/CoworkingAdvantages";
-import CoworkingCards from "../../components/CoworkingGrid/CoworkingGrid";
+import CoworkingGrid from "../../components/CoworkingGrid/CoworkingGrid";
 import Filter from "../../components/Filter/Filter";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
@@ -18,7 +18,7 @@ const MainPage = () => {
             <section className={cl.mainPage}>
                 <Filter onCapacityChange={setSelectedCapacity} />
                 <h2 className={cl.title}>Выбрать коворкинг</h2>
-                <CoworkingCards selectedCapacity={selectedCapacity} />
+                <CoworkingGrid selectedCapacity={selectedCapacity} />
                 <CoworkingAdvantages />
                 <Map />
                 <Footer />

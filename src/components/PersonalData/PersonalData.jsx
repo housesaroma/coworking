@@ -7,9 +7,9 @@ import cl from "./PersonalData.module.css";
 
 const PersonalData = () => {
     const [data, setData] = useState({
-        lastName: "Иванов",
-        firstName: "Иван",
-        middleName: "Иванович",
+        lastName: "Обабков",
+        firstName: "Илья",
+        middleName: "Николаевич",
         email: "Ivanov_II@urfu.me",
         password: "qwerty123",
     });

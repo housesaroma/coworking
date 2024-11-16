@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
 import cl from "./Footer.module.css";
 
 const Footer = () => {
+    const [redirectToBooking, setRedirectToBooking] = useState(false);
+    const [title, setTitle] = useState("");
+    const location = useLocation();
+
+    if (redirectToBooking) {
+        return <Navigate to="/booking" state={{ title }} />;
+    }
+
+    const handleClick = (newTitle) => {
+        if (location.pathname === "/booking") {
+            setTitle(newTitle);
+        } else {
+            setTitle(newTitle);
+            setRedirectToBooking(true);
+        }
+    };
+
     return (
         <footer className={cl.footer}>
             <nav className={cl.navigation}>
@@ -12,18 +30,30 @@ const Footer = () => {
                         </a>
                     </li>
                     <li>
-                        <a className={cl.link} href="!#">
+                        <a
+                            className={cl.link}
+                            href
+                            onClick={() => handleClick("Мои бронирования")}
+                        >
                             Мои бронирования
                         </a>
                     </li>
                     <li>
-                        <a className={cl.link} href="!#">
+                        <a
+                            className={cl.link}
+                            href
+                            onClick={() => handleClick("Личные данные")}
+                        >
                             Личные данные
                         </a>
                     </li>
                     <li>
-                        <a className={cl.link} href="!#">
-                            История бронирований
+                        <a
+                            className={cl.link}
+                            href
+                            onClick={() => handleClick("История бронирования")}
+                        >
+                            История бронирования
                         </a>
                     </li>
                 </ul>

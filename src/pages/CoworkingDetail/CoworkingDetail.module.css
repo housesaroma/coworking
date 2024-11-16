@@ -1,0 +1,97 @@
+.title {
+    font-family: "Tenor Sans";
+    font-size: clamp(1.75rem, 0.597rem + 4.92vw, 6.5rem);
+    color: #424242;
+    font-weight: normal;
+    margin: 80px 100px;
+}
+
+.imageContainer {
+    margin: 0 100px;
+}
+
+.img {
+    width: 100%;
+    border-radius: 50px;
+}
+
+.description {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 40px 100px;
+}
+
+.watch,
+.geo,
+.profile {
+    font-family: "GrtskExa Light";
+    font-size: 24px;
+    display: flex;
+    gap: 14px;
+}
+
+.accordionDescription {
+    margin-top: 24px;
+}
+
+.accordion {
+    font-family: "GrtskExa Light";
+    font-size: 24px;
+    line-height: 1;
+}
+
+.accordionItem {
+    cursor: pointer;
+    padding: 24px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s;
+    border-radius: 50px;
+    background: #f2f2f2;
+    margin: 40px 100px;
+}
+
+.accordionHeader {
+    font-family: "GrtskExa Regular";
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+}
+
+.accordionItem:hover {
+    background-color: #e0e0e0;
+}
+
+@media (max-width: 1120px) {
+    .accordionItem,
+    .titleб,
+    .description {
+        margin: 32px 80px;
+    }
+    .imageContainer {
+        margin: 0 80px;
+    }
+}
+
+@media (max-width: 920px) {
+    .accordionItem {
+        padding: 24px;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 620px) {
+    .title,
+    .accordionItem,
+    .description {
+        margin: 32px;
+    }
+    .imageContainer {
+        margin: 0 32px;
+    }
+}
