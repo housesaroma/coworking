@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "./static/css/main.915ed4bb.css",
-    "main.js": "./static/js/main.e0ebaa81.js",
+    "main.css": "./static/css/main.473a93a0.css",
+    "main.js": "./static/js/main.632affd3.js",
     "static/media/bottom.jpg": "./static/media/bottom.d290874758f7ea761b19.jpg",
     "static/media/top.jpg": "./static/media/top.3fe7d1ad49c8c2c0fdea.jpg",
     "static/media/card1.jpg": "./static/media/card1.e14a4778de14e7b98563.jpg",
@@ -15,15 +15,18 @@
     "static/media/GrtskMega-Bold.ttf": "./static/media/GrtskMega-Bold.a92c0f55ef0b13e0ec02.ttf",
     "static/media/GrtskExa-Regular.ttf": "./static/media/GrtskExa-Regular.39bf07e3b44a5ee40204.ttf",
     "static/media/card4.jpg": "./static/media/card4.bfb95b590922c14973d9.jpg",
-    "static/media/IconRingNotification.svg": "./static/media/IconRingNotification.c6f33c1edbf7d8a43798819acd1ff337.svg",
+    "static/media/IconRingNotification.svg": "./static/media/IconRingNotification.5816d31986d6e0a8163f7d18c40d53d5.svg",
+    "static/media/IconGeo.svg": "./static/media/IconGeo.909b7043f119ba6399c86b8ae89017d3.svg",
+    "static/media/IconWatchStroked.svg": "./static/media/IconWatchStroked.c8d0501093569d9aceafc9b334baa620.svg",
     "static/media/pencil.svg": "./static/media/pencil.a23b552526b0a293cef511775a08cbf6.svg",
+    "static/media/IconProfile.svg": "./static/media/IconProfile.f02978b32ba06d17a1c279380f738578.svg",
     "index.html": "./index.html",
-    "static/media/arrow.svg": "./static/media/arrow.5ffdcda44b2e51ebd6254cd89b3d19fd.svg",
-    "main.915ed4bb.css.map": "./static/css/main.915ed4bb.css.map",
-    "main.e0ebaa81.js.map": "./static/js/main.e0ebaa81.js.map"
+    "static/media/arrow.svg": "./static/media/arrow.1d34c38e431bdc3f080b1783987e2e7e.svg",
+    "main.473a93a0.css.map": "./static/css/main.473a93a0.css.map",
+    "main.632affd3.js.map": "./static/js/main.632affd3.js.map"
   },
   "entrypoints": [
-    "static/css/main.915ed4bb.css",
-    "static/js/main.e0ebaa81.js"
+    "static/css/main.473a93a0.css",
+    "static/js/main.632affd3.js"
   ]
 }
