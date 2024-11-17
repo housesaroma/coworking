@@ -8,7 +8,7 @@ import arrow from "../../assets/icons/arrow.svg";
 import BookingFilter from "../../components/BookingFilter/BookingFilter";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
-import cl from "./CoworkingDetail.module.css";
+import cl from "./CoworkingDetailPage.module.css";
 
 const CoworkingDetail = () => {
     const location = useLocation();
