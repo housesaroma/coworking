@@ -4,6 +4,7 @@ import cl from "./Footer.module.css";
 
 const Footer = () => {
     const [redirectToBooking, setRedirectToBooking] = useState(false);
+    const [redirectToMain, setRedirectToMain] = useState(false);
     const [title, setTitle] = useState("");
     const location = useLocation();
 
@@ -20,12 +21,26 @@ const Footer = () => {
         }
     };
 
+    const handleMainRedirect = () => {
+        if (location.pathname !== "/main") {
+            setRedirectToMain(true);
+        }
+    };
+
+    if (redirectToMain) {
+        return <Navigate to="/main" />;
+    }
+
     return (
         <footer className={cl.footer}>
             <nav className={cl.navigation}>
                 <ul className="list">
                     <li>
-                        <a className={cl.link} href="!#">
+                        <a
+                            className={cl.link}
+                            href
+                            onClick={handleMainRedirect}
+                        >
                             Главная
                         </a>
                     </li>

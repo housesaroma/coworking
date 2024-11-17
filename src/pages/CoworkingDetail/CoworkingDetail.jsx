@@ -81,7 +81,7 @@ const CoworkingDetail = () => {
                     </div>
                 ))}
             </div>
-            <BookingFilter maxCapacity={places} />
+            <BookingFilter maxCapacity={places} title={title}/>
             <Footer />
         </div>
     );

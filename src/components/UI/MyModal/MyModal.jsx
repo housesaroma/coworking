@@ -1,22 +1,48 @@
 import React from "react";
+import MyButton from "../Button/MyButton";
 import cl from "./MyModal.module.css";
 
-const MyModal = ({ children, visible, setVisible }) => {
-    const rootClasses = [cl.myModal];
-    if (visible) {
-        rootClasses.push(cl.active);
-    }
+const MyModal = ({
+    isVisible,
+    onClose,
+    onConfirm,
+    data,
+    time,
+    capacity,
+    title,
+}) => {
+    if (!isVisible) return null;
 
     return (
-        <div
-            className={rootClasses.join(" ")}
-            onClick={() => setVisible(false)}
-        >
-            <div
-                className={cl.myModalContent}
-                onClick={(e) => e.stopPropagation()}
-            >
-                {children}
+        <div className={cl.modalOverlay}>
+            <div className={cl.modalContent}>
+                <h2 className={cl.title}>Подтверждение бронирования</h2>
+
+                <div className={cl.block}>
+                    <p className={cl.text}>
+                        Вы планируете забронировать коворкинг
+                    </p>
+                    <div className={cl.field}>{title}</div>
+                </div>
+                <div className={cl.block}>
+                    <p className={cl.text}>Выбранная дата</p>
+                    <div className={cl.field}>{data}</div>
+                </div>
+
+                <div className={cl.block}>
+                    <p className={cl.text}>Временной промежуток</p>
+                    <div className={cl.field}>{time}</div>
+                </div>
+
+                <div className={cl.block}>
+                    <p className={cl.text}>Количество необходимых мест</p>
+                    <div className={cl.field}>{capacity}</div>
+                </div>
+
+                <div className={cl.modalActions}>
+                    <MyButton onClick={onClose}>Отменить</MyButton>
+                    <MyButton onClick={onConfirm}>Подтвердить</MyButton>
+                </div>
             </div>
         </div>
     );
