@@ -97,3 +97,49 @@
 .logo {
     cursor: pointer;
 }
+
+.notificationsPopup {
+    position: absolute; /* Position fixed to overlay content */
+    top: 104px; /* Adjust as needed to position below the header */
+    right: 0px; /* Adjust as needed to position from the right */
+    background-color: #14191a; /* Match header color */
+    border-radius: 8px; /* Rounded corners */
+    z-index: 1000; /* Ensure it appears above other content */
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    padding: 18px 32px;
+    width: 600px; /* Set a fixed width */
+}
+
+@media (max-width: 768px) {
+    
+    .notificationsPopup {
+        padding: 16px 24px;
+        width: 400px; /* Adjust width for smaller screens */
+        top: 68px;
+    }
+}
+
+@media (max-width: 495px) {
+    .notificationsPopup {
+        padding: 8px 12px;
+        width: 300px; /* Adjust width for smaller screens */
+        top: 36px;
+    }
+}
+
+.notificationText {
+    text-align: center;
+    color: #fff; /* Ensure text is readable */
+}
+
+.notificationItem {
+    font-family: "GrtskTera Regular";
+    color: #fff;
+    font-size: clamp(0.625rem, 0.398rem + 0.73vw, 0.75rem);
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center align text and button */
+    gap: 12px;
+}
