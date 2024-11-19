@@ -13,6 +13,12 @@ const MyModal = ({
 }) => {
     if (!isVisible) return null;
 
+    const formatTimeRange = (hour) => {
+        const startHour = parseInt(hour, 10);
+        const endHour = (startHour + 1) % 24; // Ensure it wraps around after 23
+        return `${startHour}:00-${endHour}:00`;
+    };
+
     return (
         <div className={cl.modalOverlay}>
             <div className={cl.modalContent}>
@@ -31,7 +37,7 @@ const MyModal = ({
 
                 <div className={cl.block}>
                     <p className={cl.text}>Временной промежуток</p>
-                    <div className={cl.field}>{time}</div>
+                    <div className={cl.field}>{formatTimeRange(time)}</div>
                 </div>
 
                 <div className={cl.block}>

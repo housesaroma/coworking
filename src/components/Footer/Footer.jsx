@@ -17,12 +17,14 @@ const Footer = () => {
             setTitle(newTitle);
         } else {
             setTitle(newTitle);
+            window.scrollTo(0, 0);
             setRedirectToBooking(true);
         }
     };
 
     const handleMainRedirect = () => {
         if (location.pathname !== "/main") {
+            window.scrollTo(0, 0);
             setRedirectToMain(true);
         }
     };
