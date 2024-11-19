@@ -12,6 +12,14 @@ const ScannerPage = () => {
     const html5QrCodeRef = useRef(null);
 
     useEffect(() => {
+        navigator.permissions
+            .query({ name: "camera" })
+            .then((permissionStatus) => {
+                if (permissionStatus.state === "denied") {
+                    setErrorMessage("Вы не предоставили доступ к камере");
+                }
+            });
+
         html5QrCodeRef.current = new Html5Qrcode("reader");
         return () => {
             if (html5QrCodeRef.current && isScanning) {
@@ -56,8 +64,8 @@ const ScannerPage = () => {
             .catch((err) => {
                 console.error("Unable to start scanning", err);
                 if (
-                    err.name === "NotAllowedError" ||
-                    err.name === "PermissionDeniedError"
+                    err.includes("NotAllowedError") ||
+                    err.includes("PermissionDeniedError")
                 ) {
                     setErrorMessage("Вы не предоставили доступ к камере");
                 } else {
