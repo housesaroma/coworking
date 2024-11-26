@@ -23,4 +23,26 @@ export default class Service {
             throw error;
         }
     }
+
+    static async loginUser(email, password) {
+        try {
+            const response = await axios.post(
+                "http://localhost:8070/api/auth/login",
+                {
+                    email: email,
+                    password: password,
+                },
+                {
+                    headers: {
+                        'Content-Type': 'application/json', // Ensure the content type is set
+                    },
+                    withCredentials: true, // Include credentials if needed
+                }
+            );
+            return response;
+        } catch (error) {
+            console.error("Login failed:", error);
+            throw error;
+        }
+    }
 }

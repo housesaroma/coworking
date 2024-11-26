@@ -29,7 +29,7 @@ const RegistrationPage = () => {
     const register = async (event) => {
         event.preventDefault();
         if (formData.password !== formData.confirmPassword) {
-            alert("Passwords do not match!");
+            console.log("Passwords do not match!");
             return;
         }
         try {
@@ -41,11 +41,11 @@ const RegistrationPage = () => {
             if (response.status === 200) {
                 setIsAuth(true);
                 localStorage.setItem("auth", "true");
-                alert("Registration successful!");
+                console.log("Registration successful!");
             }
         } catch (error) {
             console.error("Registration failed:", error);
-            alert("Registration failed. Please try again.");
+            console.log("Registration failed. Please try again.");
         }
     };
 
