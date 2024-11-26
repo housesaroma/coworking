@@ -3,6 +3,14 @@ import Service from "../api/Service";
 export const tryLogin = (formData, setIsAuth, setErrorMessage) => {
     return async (event) => {
         event.preventDefault();
+
+        for (const key in formData) {
+            if (formData[key].trim() === "") {
+                setErrorMessage("Все поля должны быть заполнены!");
+                return;
+            }
+        }
+
         try {
             const response = await Service.loginUser(
                 formData.email,
@@ -20,9 +28,8 @@ export const tryLogin = (formData, setIsAuth, setErrorMessage) => {
                 setErrorMessage("Почта не была подтверждена!");
             } else {
                 console.error("Login failed:", error);
-                setErrorMessage('Ошибка входа, попробуйте снова.');
+                setErrorMessage("Ошибка входа, попробуйте снова.");
             }
         }
     };
-}
-
+};
