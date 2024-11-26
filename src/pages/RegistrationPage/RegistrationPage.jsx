@@ -1,14 +1,17 @@
 import React, { useContext, useState } from "react";
-import Service from "../../api/Service.js";
+import { Navigate } from "react-router-dom";
 import { AuthContext } from "../../components/context";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
+import { tryRegister } from "../../utils/register.js";
 import cl from "./RegistrationPage.module.css";
 
 const RegistrationPage = () => {
     const { setIsAuth } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
+    const [redirectToLogin, setRedirectToLogin] = useState(false);
+
     const [formData, setFormData] = useState({
         lastName: "",
         firstName: "",
@@ -17,6 +20,7 @@ const RegistrationPage = () => {
         password: "",
         confirmPassword: "",
     });
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -26,32 +30,15 @@ const RegistrationPage = () => {
         }));
     };
 
-    const register = async (event) => {
-        event.preventDefault();
-        if (formData.password !== formData.confirmPassword) {
-            console.log("Passwords do not match!");
-            return;
-        }
-        try {
-            const response = await Service.registerUser(
-                formData.email,
-                formData.password,
-                `${formData.lastName} ${formData.firstName} ${formData.middleName}`
-            );
-            if (response.status === 200) {
-                setIsAuth(true);
-                localStorage.setItem("auth", "true");
-                console.log("Registration successful!");
-            }
-        } catch (error) {
-            console.error("Registration failed:", error);
-            console.log("Registration failed. Please try again.");
-        }
-    };
+    const register = tryRegister(formData, setErrorMessage, setIsAuth);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
     };
+
+    if (redirectToLogin) {
+        return <Navigate to="/login" />;
+    }
 
     return (
         <div className={cl.registrationPage}>
@@ -111,9 +98,21 @@ const RegistrationPage = () => {
                             value={formData.confirmPassword}
                             onChange={handleChange}
                         />
+                        {errorMessage && (
+                            <div className={cl.error}>{errorMessage}</div>
+                        )}
                         <MyButton>Далее</MyButton>
                     </form>
                     <p className={cl.note}>
+                        Уже есть аккаунт? -{" "}
+                        <span
+                            className={cl.link}
+                            onClick={() => setRedirectToLogin(true)}
+                        >
+                            Войти
+                        </span>
+                    </p>
+                    <p className={cl.subnote}>
                         Сервис доступен только для студентов и сотрудников УрФУ
                     </p>
                 </div>

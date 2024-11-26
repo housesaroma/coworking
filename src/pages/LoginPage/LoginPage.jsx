@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
-import Service from "../../api/Service.js";
 import { AuthContext } from "../../components/context";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
+import { tryLogin } from "../../utils/login.js";
 import cl from "./LoginPage.module.css";
 
 const LoginPage = () => {
@@ -12,29 +12,14 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [redirectToRegister, setRedirectToRegister] = useState(false);
     const [formData, setFormData] = useState({ email: "", password: "" });
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const login = async (event) => {
-        event.preventDefault();
-        try {
-            const response = await Service.loginUser(
-                formData.email,
-                formData.password
-            );
-            if (response.status === 200) {
-                setIsAuth(true);
-                localStorage.setItem("auth", "true");
-                console.log("Login successful!");
-            }
-        } catch (error) {
-            console.error("Login failed:", error);
-            console.log("Login failed. Please try again.");
-        }
-    };
+    const login = tryLogin(formData, setIsAuth, setErrorMessage);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -74,6 +59,9 @@ const LoginPage = () => {
                                 {showPassword ? "🙈" : "👁️"}
                             </span>
                         </div>
+                        {errorMessage && (
+                            <div className={cl.error}>{errorMessage}</div>
+                        )}
                         <MyButton>Войти</MyButton>
                     </form>
                     <p className={cl.note}>

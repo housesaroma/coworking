@@ -61,6 +61,15 @@
     margin-top: 80px;
 }
 
+.subnote {
+    font-family: "GrtskExa Light";
+    text-align: center;
+    font-size: clamp(0.875rem, 0.723rem + 0.65vw, 1.5rem);
+    width: 50vw;
+    margin: 0 auto;
+    margin-top: 24px;
+}
+
 .passwordContainer {
     position: relative;
     display: flex;
@@ -74,4 +83,18 @@
     cursor: pointer;
     width: 24px;
     height: 24px;
+}
+
+.error {
+    font-family: "GrtskExa Light";
+    font-size: 14px;
+    font-weight: normal;
+    color: red;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.link{
+    cursor: pointer;
+    text-decoration: underline;
 }
