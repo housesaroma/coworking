@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useLocation } from "react-router-dom";
 import { AuthContext } from "../../components/context";
 import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
@@ -8,7 +9,6 @@ import PersonalData from "../../components/PersonalData/PersonalData";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyRadioButton from "../../components/UI/RadioButton/MyRadioButton";
 import cl from "./BookingPage.module.css";
-import { useLocation } from "react-router-dom";
 
 export const BookingPage = () => {
     const location = useLocation();

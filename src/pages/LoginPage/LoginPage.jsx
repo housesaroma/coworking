@@ -8,7 +8,7 @@ import { tryLogin } from "../../utils/login.js";
 import cl from "./LoginPage.module.css";
 
 const LoginPage = () => {
-    const { setIsAuth } = useContext(AuthContext);
+    const { setIsAuth, setAuthToken } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [redirectToRegister, setRedirectToRegister] = useState(false);
     const [formData, setFormData] = useState({ email: "", password: "" });
@@ -19,7 +19,7 @@ const LoginPage = () => {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const login = tryLogin(formData, setIsAuth, setErrorMessage);
+    const login = tryLogin(formData, setIsAuth, setErrorMessage, setAuthToken);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);

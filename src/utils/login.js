@@ -1,6 +1,6 @@
 import Service from "../api/Service";
 
-export const tryLogin = (formData, setIsAuth, setErrorMessage) => {
+export const tryLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => {
     return async (event) => {
         event.preventDefault();
 
@@ -17,10 +17,14 @@ export const tryLogin = (formData, setIsAuth, setErrorMessage) => {
                 formData.password
             );
             if (response.status === 200) {
+                const bearerToken = response.data.accessToken;
+                setAuthToken(bearerToken);
+                localStorage.setItem("authToken", bearerToken);
                 setIsAuth(true);
                 localStorage.setItem("auth", "true");
                 console.log("Login successful!");
                 setErrorMessage(null);
+                // console.log(bearerToken)
             }
         } catch (error) {
             if (error.response && error.response.status === 401) {

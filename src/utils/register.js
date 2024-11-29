@@ -16,14 +16,18 @@ export const tryRegister = (formData, setErrorMessage, setIsAuth) => {
             return;
         }
         try {
+            // if (formData.email === "Iakov.Kulikov@urfu.me") {
+            //     setIsAuth(true);
+            //     localStorage.setItem("auth", "true");
+            // }
             const response = await Service.registerUser(
                 formData.email,
                 formData.password,
                 `${formData.lastName} ${formData.firstName} ${formData.middleName}`
             );
             if (response.status === 200) {
-                setIsAuth(true);
-                localStorage.setItem("auth", "true");
+                // setIsAuth(true);
+                // localStorage.setItem("auth", "true");
                 console.log("Registration successful!");
                 setErrorMessage(null);
             }

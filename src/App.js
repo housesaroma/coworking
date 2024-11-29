@@ -7,11 +7,17 @@ import "./styles/fonts.css";
 
 function App() {
     const [isAuth, setIsAuth] = useState(false);
+    const [authToken, setAuthToken] = useState(null);
     const [isLoading, setLoading] = useState(true);
 
     useEffect(() => {
         if (localStorage.getItem("auth")) {
             setIsAuth(true);
+        }
+        
+        const storedToken = localStorage.getItem("authToken");
+        if (storedToken) {
+            setAuthToken(storedToken);
         }
         setLoading(false);
     }, []);
@@ -23,6 +29,8 @@ function App() {
                     isAuth,
                     setIsAuth,
                     isLoading,
+                    authToken,
+                    setAuthToken,
                 }}
             >
                 <HashRouter>
