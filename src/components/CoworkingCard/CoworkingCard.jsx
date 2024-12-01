@@ -9,6 +9,7 @@ const CoworkingCard = ({
     description,
     places,
     images,
+    id
 }) => {
     const [redirectToDetail, setRedirectToDetail] = useState(false);
 
@@ -16,7 +17,7 @@ const CoworkingCard = ({
         return (
             <Navigate
                 to="/detail"
-                state={{ src, title, subtitle, description, images, places }}
+                state={{ src, title, subtitle, description, images, places, id }}
             />
         );
     }

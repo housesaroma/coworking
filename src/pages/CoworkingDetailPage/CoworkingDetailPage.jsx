@@ -14,10 +14,10 @@ const CoworkingDetail = () => {
     const location = useLocation();
     const [expandedSection, setExpandedSection] = useState(null);
 
-    const { src, title, subtitle, description, places, images } =
+    const { src, title, subtitle, description, places, images, id } =
         location.state || {};
 
-    if (!title && !src && !subtitle && !description && !places && !images) {
+    if (!title && !src && !subtitle && !description && !places && !images && !id) {
         return <div className={cl.detail}>Нет данных для отображения.</div>;
     }
 
@@ -81,7 +81,7 @@ const CoworkingDetail = () => {
                     </div>
                 ))}
             </div>
-            <BookingFilter maxCapacity={places} title={title}/>
+            <BookingFilter maxCapacity={places} title={title} id={id}/>
             <Footer />
         </div>
     );

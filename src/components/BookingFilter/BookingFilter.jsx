@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     generateCapacityOptions,
     generateDateOptions,
@@ -8,8 +8,11 @@ import MyButton from "../UI/Button/MyButton";
 import MyModal from "../UI/MyModal/MyModal";
 import MySelect from "../UI/Select/MySelect";
 import cl from "./BookingFilter.module.css";
+import { reformatDateTime } from "../../utils/format";
+import { AuthContext } from "../context";
+import { CreateBooking } from "../../utils/CreateBooking";
 
-const BookingFilter = ({ maxCapacity, title }) => {
+const BookingFilter = ({ maxCapacity, title, id }) => {
     const [data, setData] = useState();
     const [time, setTime] = useState();
     const [capacity, setCapacity] = useState();
@@ -19,6 +22,7 @@ const BookingFilter = ({ maxCapacity, title }) => {
     const [capacityOptions, setCapacityOptions] = useState([]);
 
     const [isModalVisible, setModalVisible] = useState(false);
+    const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
         const generatedDataOptions = generateDateOptions();
@@ -46,9 +50,16 @@ const BookingFilter = ({ maxCapacity, title }) => {
         setModalVisible(false);
     };
 
-    const handleConfirmBooking = () => {
-        // Логика подтверждения бронирования
-        setModalVisible(false);
+    const handleConfirmBooking = async () => {
+        const { dateTimeStart, dateTimeEnd } = reformatDateTime(data, time);
+
+        try {
+            const result = await CreateBooking(authToken, id, dateTimeStart, dateTimeEnd, capacity);
+            console.log("Booking successful:", result);
+            setModalVisible(false);
+        } catch (error) {
+            console.error("Error creating booking:", error);
+        }
     };
 
     return (
@@ -99,6 +110,7 @@ const BookingFilter = ({ maxCapacity, title }) => {
                 time={time}
                 capacity={capacity}
                 title={title}
+                id={id}
             ></MyModal>
         </div>
     );
