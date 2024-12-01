@@ -8,7 +8,7 @@ import MyButton from "../UI/Button/MyButton";
 import MySelect from "../UI/Select/MySelect";
 import cl from "./Filter.module.css";
 
-const BookingFilter = ({ onCapacityChange }) => {
+const BookingFilter = ({ onFilterChange  }) => {
     // const [address, setAddress] = useState();
     const [data, setData] = useState();
     const [time, setTime] = useState();
@@ -19,14 +19,23 @@ const BookingFilter = ({ onCapacityChange }) => {
     const [capacityOptions, setCapacityOptions] = useState([]);
 
     useEffect(() => {
-        setDataOptions(generateDateOptions());
-        setTimeOptions(generateTimeOptions());
-        setCapacityOptions(generateCapacityOptions(30));
+        const dates = generateDateOptions();
+        const times = generateTimeOptions();
+        const capacities = generateCapacityOptions(30);
+
+        setDataOptions(dates);
+        setTimeOptions(times);
+        setCapacityOptions(capacities);
+
+        // Set initial state to the first option if available
+        if (dates.length > 0) setData(dates[0].value);
+        if (times.length > 0) setTime(times[0].value);
+        if (capacities.length > 0) setCapacity(capacities[0].value);
     }, []);
 
     const handleSearch = () => {
-        if (onCapacityChange) {
-            onCapacityChange(capacity);
+        if (onFilterChange ) {
+            onFilterChange ({capacity: capacity, date: data, time: time});
         }
     };
 

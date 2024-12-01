@@ -9,16 +9,16 @@ import Map from "../../components/Map/Map";
 import cl from "./MainPage.module.css";
 
 const MainPage = () => {
-    const [selectedCapacity, setSelectedCapacity] = useState(null);
+    const [filterData, setFilterData] = useState({ capacity: null, date: null, time: null });
 
     return (
         <div>
             <Header title={"Главная"} showIcons={true} />
             <MainPageHead />
             <section className={cl.mainPage}>
-                <Filter onCapacityChange={setSelectedCapacity} />
+                <Filter onFilterChange={setFilterData} />
                 <h2 className={cl.title}>Выбрать коворкинг</h2>
-                <CoworkingGrid selectedCapacity={selectedCapacity} />
+                <CoworkingGrid filterData={filterData} />
                 <CoworkingAdvantages />
                 <Map />
                 <Footer />

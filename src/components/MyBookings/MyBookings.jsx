@@ -15,7 +15,7 @@ const MyBookings = () => {
         setExpandedSection(expandedSection === section ? null : section);
     };
 
-    const coworkingSpaces = CoworkingList();
+    const coworkingSpaces = coworkings;
 
     return (
         <div>

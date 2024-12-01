@@ -7,7 +7,7 @@ import CoworkingList, { coworkings } from "../../utils/coworkings";
 const MyHistory = () => {
     const [expandedSection, setExpandedSection] = useState(null);
 
-    const coworkingSpaces = CoworkingList();
+    const coworkingSpaces = coworkings;
 
     const toggleSection = (section) => {
         setExpandedSection(expandedSection === section ? null : section);
