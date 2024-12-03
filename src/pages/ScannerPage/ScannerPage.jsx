@@ -2,12 +2,13 @@ import { Html5Qrcode } from "html5-qrcode";
 import React, { useEffect, useRef, useState } from "react";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
+import { Scan } from "../../utils/Scan";
 import cl from "./ScannerPage.module.css";
 
 const ScannerPage = () => {
     const [scanResult, setScanResult] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState("");
     const [lastErrorMessage, setLastErrorMessage] = useState(null);
     const html5QrCodeRef = useRef(null);
 
@@ -44,17 +45,22 @@ const ScannerPage = () => {
             .start(
                 { facingMode: "environment" },
                 config,
-                (decodedText) => {
-                    setScanResult(decodedText);
-                    stopScanning();
+                async (decodedText) => {
+                    try {
+                        await Scan(decodedText);
+                        setScanResult(decodedText);
+                        setErrorMessage(null); // Очистите сообщение об ошибке при успешном сканировании
+                    } catch (error) {
+                        setErrorMessage("Произошла ошибка при сканировании");
+                        stopScanning(); // Остановите сканирование при ошибке
+                    }
                 },
                 (errorMessage) => {
-                    setLastErrorMessage(errorMessage);
-                    if (errorMessage !== lastErrorMessage) {
-                        // console.warn(
-                        //     `QR Code no longer in front of camera. Error: ${errorMessage}`
-                        // );
-                    }
+                    // if (errorMessage !== lastErrorMessage) {
+                    //     setLastErrorMessage(errorMessage);
+                    //     console.warn(`QR Code error: ${errorMessage}`);
+                    //     console.warn(`QR Code error: ${lastErrorMessage}`);
+                    // }
                 }
             )
             .then(() => {
