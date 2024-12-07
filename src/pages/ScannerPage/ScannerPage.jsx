@@ -2,14 +2,13 @@ import { Html5Qrcode } from "html5-qrcode";
 import React, { useEffect, useRef, useState } from "react";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
-import { Scan } from "../../utils/Scan";
+import { Scan } from "../../api/Scan";
 import cl from "./ScannerPage.module.css";
 
 const ScannerPage = () => {
     const [scanResult, setScanResult] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
-    const [lastErrorMessage, setLastErrorMessage] = useState(null);
     const html5QrCodeRef = useRef(null);
 
     useEffect(() => {
@@ -54,13 +53,6 @@ const ScannerPage = () => {
                         setErrorMessage("Произошла ошибка при сканировании");
                         stopScanning(); // Остановите сканирование при ошибке
                     }
-                },
-                (errorMessage) => {
-                    // if (errorMessage !== lastErrorMessage) {
-                    //     setLastErrorMessage(errorMessage);
-                    //     console.warn(`QR Code error: ${errorMessage}`);
-                    //     console.warn(`QR Code error: ${lastErrorMessage}`);
-                    // }
                 }
             )
             .then(() => {
@@ -102,7 +94,7 @@ const ScannerPage = () => {
                 <h1 className={cl.title}>QR-сканер</h1>
                 <div className={cl.container}>
                     {scanResult ? (
-                        <div>{scanResult}</div>
+                        <div>{"Дверь в коворкинг открыта!"}</div>
                     ) : (
                         <div id="reader" className={cl.reader}></div>
                     )}

@@ -29,6 +29,11 @@
 }
 
 .container {
+    font-family: "Tenor Sans";
+    font-size: clamp(1rem, 0.879rem + 0.52vw, 1.5rem);
+    font-weight: normal;
+    color: #fff;
+    text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;

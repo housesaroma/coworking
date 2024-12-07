@@ -10,7 +10,7 @@ import MySelect from "../UI/Select/MySelect";
 import cl from "./BookingFilter.module.css";
 import { reformatDateTime } from "../../utils/format";
 import { AuthContext } from "../context";
-import { CreateBooking } from "../../utils/CreateBooking";
+import { CreateBooking } from "../../api/CreateBooking";
 
 const BookingFilter = ({ maxCapacity, title, id }) => {
     const [data, setData] = useState();

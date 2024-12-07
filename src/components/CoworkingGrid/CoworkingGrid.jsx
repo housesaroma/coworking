@@ -2,8 +2,8 @@ import React from "react";
 import CoworkingCard from "../CoworkingCard/CoworkingCard";
 import cl from "./CoworkingGrid.module.css";
 import { reformatDateTime } from "../../utils/format";
-import { CoworkingList } from "../../utils/CoworkingList";
-import { AvailabilityCoworkingList } from "../../utils/AvailabilityCoworkingList";
+import { CoworkingList } from "../../api/CoworkingList";
+import { AvailabilityCoworkingList } from "../../api/AvailabilityCoworkingList";
 
 
 const CoworkingGrid = ({ filterData }) => {
