@@ -1,4 +1,4 @@
-import Service from "../api/Service";
+import Service from "./Service";
 
 export const tryLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => {
     return async (event) => {

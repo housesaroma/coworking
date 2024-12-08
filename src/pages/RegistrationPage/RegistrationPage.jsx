@@ -1,14 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { AuthContext } from "../../components/context";
+import { tryRegister } from "../../api/register.js";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
-import { tryRegister } from "../../utils/register.js";
 import cl from "./RegistrationPage.module.css";
 
 const RegistrationPage = () => {
-    const { setIsAuth } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [redirectToLogin, setRedirectToLogin] = useState(false);
 
@@ -21,6 +19,7 @@ const RegistrationPage = () => {
         confirmPassword: "",
     });
     const [errorMessage, setErrorMessage] = useState(null);
+    const [successMessage, setSuccessMessage] = useState(null); // New state for success message
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -30,7 +29,7 @@ const RegistrationPage = () => {
         }));
     };
 
-    const register = tryRegister(formData, setErrorMessage, setIsAuth);
+    const register = tryRegister(formData, setErrorMessage, setSuccessMessage);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -100,6 +99,9 @@ const RegistrationPage = () => {
                         />
                         {errorMessage && (
                             <div className={cl.error}>{errorMessage}</div>
+                        )}
+                        {successMessage && (
+                            <div className={cl.success}>{successMessage}</div>
                         )}
                         <MyButton>Далее</MyButton>
                     </form>

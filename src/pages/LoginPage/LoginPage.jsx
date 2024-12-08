@@ -4,7 +4,7 @@ import { AuthContext } from "../../components/context";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
-import { tryLogin } from "../../utils/login.js";
+import { tryLogin } from "../../api/login.js";
 import cl from "./LoginPage.module.css";
 
 const LoginPage = () => {
