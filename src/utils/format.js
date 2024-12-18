@@ -21,3 +21,16 @@ export const reformatDateTime = (dateString, timeString) => {
         dateTimeEnd: formatDate(dateTimeEnd),
     };
 };
+
+export const formatDateTime = (isoString) => {
+    const date = new Date(isoString);
+    const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+    };
+    return date.toLocaleString('ru-RU', options);
+};

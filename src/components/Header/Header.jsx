@@ -10,16 +10,37 @@ const Header = ({ title, showIcons }) => {
     const [redirectToMain, setRedirectToMain] = useState(false);
     const [redirectToScanner, setRedirectToScanner] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [nextBooking, setNextBooking] = useState(null);
+    const [loading, setLoading] = useState(true);
     const location = useLocation();
+
+    useEffect(() => {
+        const fetchNextBooking = () => {
+            fetch('http://localhost:8070/api/main/bookings/next-booking')
+                .then(response => response.json())
+                .then(data => {
+                    setNextBooking(data);
+                    setLoading(false);
+                })
+                .catch(err => {
+                    console.error("Error fetching next booking:", err);
+                    setLoading(false);
+                });
+        };
+
+        fetchNextBooking();
+        const intervalId = setInterval(fetchNextBooking, 30000);
+        return () => clearInterval(intervalId);
+    }, []);
 
     useEffect(() => {
         let timer;
         if (showNotifications) {
             timer = setTimeout(() => {
                 setShowNotifications(false);
-            }, 5000); // Hide after 5 seconds
+            }, 5000);
         }
-        return () => clearTimeout(timer); // Clear timer on cleanup
+        return () => clearTimeout(timer);
     }, [showNotifications]);
 
     const handleBookRedirect = () => {
@@ -90,31 +111,24 @@ const Header = ({ title, showIcons }) => {
 
             {showNotifications && (
                 <div className={cl.notificationsPopup}>
-                    <div className={cl.notificationItem}>
-                        <p className={cl.notificationText}>
-                            У вас забронирован коворкинг через 15 минут,
-                            отсканируйте qr-код на входной двери для входа в
-                            аудиторию
-                        </p>
-                        <div className={cl.btn}>
-                            <MyButton onClick={handleScannerRedirect}>
-                                Перейти к сканированию QR-кода
-                            </MyButton>
+                    {nextBooking && nextBooking.hasUpcomingBooking && nextBooking.minutesUntilStart < 5 ? (
+                        <div className={cl.notificationItem}>
+                            <p className={cl.notificationText}>
+                                У вас скоро начинается бронирование (через {nextBooking.minutesUntilStart} минут).
+                            </p>
+                            <div className={cl.btn}>
+                                <MyButton onClick={handleScannerRedirect}>
+                                    Перейти к сканированию
+                                </MyButton>
+                            </div>
                         </div>
-                    </div>
-                    <div className={cl.notificationItem}>
-                        <p className={cl.notificationText}>
-                            У вас забронирован коворкинг через 15 минут,
-                            отсканируйте qr-код на входной двери для входа в
-                            аудиторию
-                        </p>
-                        <div className={cl.btn}>
-                            <MyButton onClick={handleScannerRedirect}>
-                                Перейти к сканированию QR-кода
-                            </MyButton>
+                    ) : (
+                        <div className={cl.notificationItem}>
+                            <p className={cl.notificationText}>
+                                Уведомлений нет
+                            </p>
                         </div>
-                    </div>
-                    {/* Добавьте дополнительные уведомления по необходимости */}
+                    )}
                 </div>
             )}
         </header>
