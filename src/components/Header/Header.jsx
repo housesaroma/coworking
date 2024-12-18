@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import avatar from "../../assets/icons/header/Avatar.jpg";
 import notification from "../../assets/icons/header/IconRingNotification.svg";
+import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
 import cl from "./Header.module.css";
 
@@ -12,17 +13,29 @@ const Header = ({ title, showIcons }) => {
     const [showNotifications, setShowNotifications] = useState(false);
     const [nextBooking, setNextBooking] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [hasNewNotifications, setHasNewNotifications] = useState(false);
     const location = useLocation();
+
+    const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
         const fetchNextBooking = () => {
-            fetch('http://localhost:8070/api/main/bookings/next-booking')
-                .then(response => response.json())
-                .then(data => {
+            fetch("http://localhost:8070/api/main/bookings/next-booking", {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                    "Content-Type": "application/json",
+                },
+            })
+                .then((response) => response.json())
+                .then((data) => {
                     setNextBooking(data);
                     setLoading(false);
+                    if (data.hasUpcomingBooking && data.minutesUntilStart < 15) {
+                        setHasNewNotifications(true);
+                    }
                 })
-                .catch(err => {
+                .catch((err) => {
                     console.error("Error fetching next booking:", err);
                     setLoading(false);
                 });
@@ -31,7 +44,7 @@ const Header = ({ title, showIcons }) => {
         fetchNextBooking();
         const intervalId = setInterval(fetchNextBooking, 30000);
         return () => clearInterval(intervalId);
-    }, []);
+    }, [authToken]);
 
     useEffect(() => {
         let timer;
@@ -65,6 +78,9 @@ const Header = ({ title, showIcons }) => {
 
     const toggleNotifications = () => {
         setShowNotifications((prev) => !prev);
+        if (!showNotifications) {
+            setHasNewNotifications(false);
+        }
     };
 
     if (redirectToScanner) {
@@ -90,13 +106,18 @@ const Header = ({ title, showIcons }) => {
 
                 {showIcons && (
                     <div className={cl.right}>
-                        <a href onClick={toggleNotifications}>
-                            <img
-                                className={cl.notification}
-                                src={notification}
-                                alt="notification"
-                            />
-                        </a>
+                        <div className={cl.notificationWrapper}>
+                            <a href onClick={toggleNotifications}>
+                                <img
+                                    className={cl.notification}
+                                    src={notification}
+                                    alt="notification"
+                                />
+                                {hasNewNotifications && (
+                                    <span className={cl.notificationBadge}></span>
+                                )}
+                            </a>
+                        </div>
                         <a href onClick={handleBookRedirect}>
                             <img
                                 className={cl.avatar}
@@ -111,10 +132,13 @@ const Header = ({ title, showIcons }) => {
 
             {showNotifications && (
                 <div className={cl.notificationsPopup}>
-                    {nextBooking && nextBooking.hasUpcomingBooking && nextBooking.minutesUntilStart < 5 ? (
+                    {nextBooking &&
+                    nextBooking.hasUpcomingBooking &&
+                    nextBooking.minutesUntilStart < 15 ? (
                         <div className={cl.notificationItem}>
                             <p className={cl.notificationText}>
-                                У вас скоро начинается бронирование (через {nextBooking.minutesUntilStart} минут).
+                                У вас скоро начинается бронирование (через{" "}
+                                {nextBooking.minutesUntilStart} минут).
                             </p>
                             <div className={cl.btn}>
                                 <MyButton onClick={handleScannerRedirect}>

@@ -3,13 +3,14 @@ import {
     generateCapacityOptions,
     generateDateOptions,
     generateTimeOptions,
+    generateTimeOptionsToday,
 } from "../../utils/generateOptions";
 import MyButton from "../UI/Button/MyButton";
 import MySelect from "../UI/Select/MySelect";
 import cl from "./Filter.module.css";
 
-const BookingFilter = ({ onFilterChange  }) => {
-    // const [address, setAddress] = useState();
+
+const BookingFilter = ({ onFilterChange }) => {
     const [data, setData] = useState();
     const [time, setTime] = useState();
     const [capacity, setCapacity] = useState();
@@ -18,48 +19,51 @@ const BookingFilter = ({ onFilterChange  }) => {
     const [timeOptions, setTimeOptions] = useState([]);
     const [capacityOptions, setCapacityOptions] = useState([]);
 
+    const today = new Date();
+    const currentHour = today.getHours();
+
     useEffect(() => {
         const dates = generateDateOptions();
-        const times = generateTimeOptions();
         const capacities = generateCapacityOptions(30);
+        const times = generateTimeOptionsToday();
+        setTimeOptions(times);
 
         setDataOptions(dates);
-        setTimeOptions(times);
         setCapacityOptions(capacities);
 
         // Set initial state to the first option if available
-        if (dates.length > 0) setData(dates[0].value);
-        if (times.length > 0) setTime(times[0].value);
+        if (dates.length > 0 && dataOptions[0]?.name) {
+            setData(dates[0].value);
+            updateTimeOptions(dates[0].value);
+        }
         if (capacities.length > 0) setCapacity(capacities[0].value);
     }, []);
 
+    const updateTimeOptions = (selectedDate) => {
+        const times = selectedDate === dataOptions[0]?.name && currentHour < 20 ? generateTimeOptionsToday() : generateTimeOptions();
+        setTimeOptions(times);
+        if (times.length > 0) setTime(times[0].value);
+    };
+
+    const handleDateChange = (value) => {
+        setData(value);
+        updateTimeOptions(value);
+    };
+
     const handleSearch = () => {
-        if (onFilterChange ) {
-            onFilterChange ({capacity: capacity, date: data, time: time});
+        if (onFilterChange) {
+            onFilterChange({ capacity: capacity, date: data, time: time });
         }
     };
 
     return (
         <div className={cl.filter}>
             <div className={cl.left}>
-                {/* <div className={cl.container}>
-                    <p className={cl.title}>Адрес</p>
-                    <MySelect
-                        value={address}
-                        onChange={(value) => setAddress(value)}
-                        defaultValue="Выберите адрес"
-                        options={[
-                            { value: 67, name: "Ленина, 67" },
-                            { value: 66, name: "Ленина, 66" },
-                        ]}
-                    />
-                </div> */}
-
                 <div className={cl.container}>
                     <p className={cl.title}>Дата</p>
                     <MySelect
                         value={data}
-                        onChange={(value) => setData(value)}
+                        onChange={handleDateChange}
                         defaultValue="Выберите дату"
                         options={dataOptions}
                     />

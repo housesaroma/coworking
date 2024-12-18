@@ -143,3 +143,18 @@
     align-items: center; /* Center align text and button */
     gap: 12px;
 }
+
+.notificationWrapper {
+    position: relative;
+}
+
+.notificationBadge {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 10px;
+    background-color: red;
+    border-radius: 50%;
+    border: 2px solid #14191a; /* Match the header background */
+}

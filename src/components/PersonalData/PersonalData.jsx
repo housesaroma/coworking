@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { userInfo } from "../../api/PersonalData";
 import avatar from "../../assets/obabkov.jpg";
+import { AuthContext } from "../../components/context";
 import Avatar from "../Avatar/Avatar";
 import MyField from "../UI/Field/MyField";
 import MyRadioButton from "../UI/RadioButton/MyRadioButton";
@@ -7,14 +9,19 @@ import cl from "./PersonalData.module.css";
 
 const PersonalData = () => {
     const [data, setData] = useState({
-        lastName: "Обабков",
-        firstName: "Илья",
-        middleName: "Николаевич",
-        email: "Ivanov_II@urfu.me",
-        password: "qwerty123",
+        lastName: "",
+        firstName: "",
+        middleName: "",
+        email: "",
+        password: "qwerty123", // Keep the password unchanged
     });
 
     const [hasChanges, setHasChanges] = useState(false);
+    const { authToken } = useContext(AuthContext);
+
+    useEffect(() => {
+        userInfo(authToken, setData);
+    }, [authToken]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

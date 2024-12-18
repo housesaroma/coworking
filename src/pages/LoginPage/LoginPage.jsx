@@ -12,7 +12,7 @@ const LoginPage = () => {
     const [showPassword, setShowPassword] = useState(false);
     const [redirectToRegister, setRedirectToRegister] = useState(false);
     const [formData, setFormData] = useState({ email: "", password: "" });
-    const [errorMessage, setErrorMessage] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);       
 
     const handleChange = (e) => {
         const { name, value } = e.target;

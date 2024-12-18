@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Service from "./Service";
 
-export const tryRegister = (formData, setErrorMessage, setSuccessMessage) => {
-    return async (event) => {
+export const useRegister = (formData, setErrorMessage, setSuccessMessage) => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const register = async (event) => {
         event.preventDefault();
 
         for (const key in formData) {
@@ -18,6 +21,7 @@ export const tryRegister = (formData, setErrorMessage, setSuccessMessage) => {
             return;
         }
         try {
+            setIsLoading(true);
             const response = await Service.registerUser(
                 formData.email,
                 formData.password,
@@ -25,10 +29,10 @@ export const tryRegister = (formData, setErrorMessage, setSuccessMessage) => {
             );
             if (response.status === 200) {
                 setErrorMessage(null);
+                setSuccessMessage(
+                    "Успешная регистрация! На почту пришло письмо для подтвержения."
+                );
             }
-            setSuccessMessage(
-                "Успешная регистрация! На почту пришло письмо для подтвержения."
-            );
         } catch (error) {
             setSuccessMessage(null);
             if (error.response && error.response.status === 409) {
@@ -38,6 +42,10 @@ export const tryRegister = (formData, setErrorMessage, setSuccessMessage) => {
             } else {
                 setErrorMessage("Ошибка регистрации, попробуйте снова.");
             }
+        } finally {
+            setIsLoading(false);
         }
     };
+
+    return { register, isLoading };
 };

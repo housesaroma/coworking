@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
-import { tryRegister } from "../../api/register.js";
+import { useRegister } from "../../api/register.js";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
+import Loader from "../../components/UI/Loader/Loader.jsx";
 import cl from "./RegistrationPage.module.css";
 
 const RegistrationPage = () => {
@@ -19,7 +20,9 @@ const RegistrationPage = () => {
         confirmPassword: "",
     });
     const [errorMessage, setErrorMessage] = useState(null);
-    const [successMessage, setSuccessMessage] = useState(null); // New state for success message
+    const [successMessage, setSuccessMessage] = useState(null);
+
+    const { register, isLoading } = useRegister(formData, setErrorMessage, setSuccessMessage);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -28,8 +31,6 @@ const RegistrationPage = () => {
             [name]: value,
         }));
     };
-
-    const register = tryRegister(formData, setErrorMessage, setSuccessMessage);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -97,13 +98,14 @@ const RegistrationPage = () => {
                             value={formData.confirmPassword}
                             onChange={handleChange}
                         />
-                        {errorMessage && (
+                        {isLoading && <Loader />}
+                        {errorMessage && !isLoading && (
                             <div className={cl.error}>{errorMessage}</div>
                         )}
-                        {successMessage && (
+                        {successMessage && !isLoading && (
                             <div className={cl.success}>{successMessage}</div>
                         )}
-                        <MyButton>Далее</MyButton>
+                        <MyButton disabled={isLoading}>Далее</MyButton>
                     </form>
                     <p className={cl.note}>
                         Уже есть аккаунт? -{" "}
