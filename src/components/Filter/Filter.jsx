@@ -9,7 +9,6 @@ import MyButton from "../UI/Button/MyButton";
 import MySelect from "../UI/Select/MySelect";
 import cl from "./Filter.module.css";
 
-
 const BookingFilter = ({ onFilterChange }) => {
     const [data, setData] = useState();
     const [time, setTime] = useState();
@@ -27,20 +26,20 @@ const BookingFilter = ({ onFilterChange }) => {
         const capacities = generateCapacityOptions(30);
         const times = generateTimeOptionsToday();
         setTimeOptions(times);
-
         setDataOptions(dates);
         setCapacityOptions(capacities);
 
-        // Set initial state to the first option if available
-        if (dates.length > 0 && dataOptions[0]?.name) {
-            setData(dates[0].value);
-            updateTimeOptions(dates[0].value);
-        }
+        if (dates.length > 0) setData(dates[0].value);
+        if (times.length > 0) setTime(times[0].value);
         if (capacities.length > 0) setCapacity(capacities[0].value);
+
     }, []);
 
     const updateTimeOptions = (selectedDate) => {
-        const times = selectedDate === dataOptions[0]?.name && currentHour < 20 ? generateTimeOptionsToday() : generateTimeOptions();
+        const times =
+            selectedDate === dataOptions[0]?.name && currentHour < 20
+                ? generateTimeOptionsToday()
+                : generateTimeOptions();
         setTimeOptions(times);
         if (times.length > 0) setTime(times[0].value);
     };

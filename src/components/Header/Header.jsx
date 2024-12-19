@@ -5,6 +5,7 @@ import notification from "../../assets/icons/header/IconRingNotification.svg";
 import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
 import cl from "./Header.module.css";
+import { getNextBooking } from "../../api/NextBooking";
 
 const Header = ({ title, showIcons }) => {
     const [redirectToBooking, setRedirectToBooking] = useState(false);
@@ -12,34 +13,13 @@ const Header = ({ title, showIcons }) => {
     const [redirectToScanner, setRedirectToScanner] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
     const [nextBooking, setNextBooking] = useState(null);
-    const [loading, setLoading] = useState(true);
     const [hasNewNotifications, setHasNewNotifications] = useState(false);
     const location = useLocation();
 
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchNextBooking = () => {
-            fetch("http://localhost:8070/api/main/bookings/next-booking", {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${authToken}`,
-                    "Content-Type": "application/json",
-                },
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    setNextBooking(data);
-                    setLoading(false);
-                    if (data.hasUpcomingBooking && data.minutesUntilStart < 15) {
-                        setHasNewNotifications(true);
-                    }
-                })
-                .catch((err) => {
-                    console.error("Error fetching next booking:", err);
-                    setLoading(false);
-                });
-        };
+        const fetchNextBooking = getNextBooking(authToken, setNextBooking, setHasNewNotifications);
 
         fetchNextBooking();
         const intervalId = setInterval(fetchNextBooking, 30000);
@@ -160,3 +140,5 @@ const Header = ({ title, showIcons }) => {
 };
 
 export default Header;
+
+

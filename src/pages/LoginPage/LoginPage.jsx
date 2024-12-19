@@ -4,8 +4,9 @@ import { AuthContext } from "../../components/context";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
-import { tryLogin } from "../../api/login.js";
+import { useLogin } from "../../api/login.js";
 import cl from "./LoginPage.module.css";
+import Loader from "../../components/UI/Loader/Loader.jsx";
 
 const LoginPage = () => {
     const { setIsAuth, setAuthToken } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const LoginPage = () => {
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const login = tryLogin(formData, setIsAuth, setErrorMessage, setAuthToken);
+    const {login, isLoading} = useLogin(formData, setIsAuth, setErrorMessage, setAuthToken);
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -59,7 +60,8 @@ const LoginPage = () => {
                                 {showPassword ? "🙈" : "👁️"}
                             </span>
                         </div>
-                        {errorMessage && (
+                        {isLoading && <Loader />}
+                        {errorMessage && !isLoading && (
                             <div className={cl.error}>{errorMessage}</div>
                         )}
                         <MyButton>Войти</MyButton>
