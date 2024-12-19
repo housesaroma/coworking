@@ -1,7 +1,10 @@
+import { useState } from "react";
 import Service from "./Service";
 
-export const tryLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => {
-    return async (event) => {
+export const useLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => {
+    const [isLoading, setIsLoading] = useState(false);
+
+    const login = async (event) => {
         event.preventDefault();
 
         for (const key in formData) {
@@ -12,6 +15,7 @@ export const tryLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => 
         }
 
         try {
+            setIsLoading(true);
             const response = await Service.loginUser(
                 formData.email,
                 formData.password
@@ -34,6 +38,9 @@ export const tryLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => 
                 console.error("Login failed:", error);
                 setErrorMessage("Ошибка входа, попробуйте снова.");
             }
+        } finally {
+            setIsLoading(false);
         }
-    };
+    }; 
+    return { login, isLoading };
 };

@@ -1,8 +1,13 @@
 export const generateDateOptions = () => {
     const options = [];
     const today = new Date();
+    const currentHour = today.getHours();
 
-    for (let i = 0; i <= 10; i++) {
+    // Determine the starting day: 0 if before 20:00, otherwise 1
+    const startDay = currentHour < 20 ? 0 : 1;
+
+    // Generate 10 days starting from the determined start day
+    for (let i = startDay; i < startDay + 10; i++) {
         const date = new Date(today);
         date.setDate(today.getDate() + i);
         const dateString = date.toLocaleDateString("ru-RU", {
@@ -16,11 +21,26 @@ export const generateDateOptions = () => {
     return options;
 };
 
+export const generateTimeOptionsToday = () => {
+    const options = [];
+    const startHour = 7; // Начало с 7:00
+    const endHour = 20; // До 20:00
+    const currentHour = new Date().getHours();
+
+    for (let hour = startHour; hour < endHour; hour++) {
+        if (hour > currentHour) {
+            const timeString = `${hour}:00 - ${hour + 1}:00`;
+            options.push({ value: `${hour}:00`, name: timeString });
+        }
+    }
+
+    return options;
+};
+
 export const generateTimeOptions = () => {
     const options = [];
     const startHour = 7; // Начало с 7:00
     const endHour = 20; // До 20:00
-
     for (let hour = startHour; hour < endHour; hour++) {
         const timeString = `${hour}:00 - ${hour + 1}:00`;
         options.push({ value: `${hour}:00`, name: timeString });

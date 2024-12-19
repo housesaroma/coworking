@@ -1,25 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import avatar from "../../assets/icons/header/Avatar.jpg";
 import notification from "../../assets/icons/header/IconRingNotification.svg";
+import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
 import cl from "./Header.module.css";
+import { getNextBooking } from "../../api/NextBooking";
 
 const Header = ({ title, showIcons }) => {
     const [redirectToBooking, setRedirectToBooking] = useState(false);
     const [redirectToMain, setRedirectToMain] = useState(false);
     const [redirectToScanner, setRedirectToScanner] = useState(false);
     const [showNotifications, setShowNotifications] = useState(false);
+    const [nextBooking, setNextBooking] = useState(null);
+    const [hasNewNotifications, setHasNewNotifications] = useState(false);
     const location = useLocation();
+
+    const { authToken } = useContext(AuthContext);
+
+    useEffect(() => {
+        const fetchNextBooking = getNextBooking(authToken, setNextBooking, setHasNewNotifications);
+
+        fetchNextBooking();
+        const intervalId = setInterval(fetchNextBooking, 30000);
+        return () => clearInterval(intervalId);
+    }, [authToken]);
 
     useEffect(() => {
         let timer;
         if (showNotifications) {
             timer = setTimeout(() => {
                 setShowNotifications(false);
-            }, 5000); // Hide after 5 seconds
+            }, 5000);
         }
-        return () => clearTimeout(timer); // Clear timer on cleanup
+        return () => clearTimeout(timer);
     }, [showNotifications]);
 
     const handleBookRedirect = () => {
@@ -44,6 +58,9 @@ const Header = ({ title, showIcons }) => {
 
     const toggleNotifications = () => {
         setShowNotifications((prev) => !prev);
+        if (!showNotifications) {
+            setHasNewNotifications(false);
+        }
     };
 
     if (redirectToScanner) {
@@ -69,13 +86,18 @@ const Header = ({ title, showIcons }) => {
 
                 {showIcons && (
                     <div className={cl.right}>
-                        <a href onClick={toggleNotifications}>
-                            <img
-                                className={cl.notification}
-                                src={notification}
-                                alt="notification"
-                            />
-                        </a>
+                        <div className={cl.notificationWrapper}>
+                            <a href onClick={toggleNotifications}>
+                                <img
+                                    className={cl.notification}
+                                    src={notification}
+                                    alt="notification"
+                                />
+                                {hasNewNotifications && (
+                                    <span className={cl.notificationBadge}></span>
+                                )}
+                            </a>
+                        </div>
                         <a href onClick={handleBookRedirect}>
                             <img
                                 className={cl.avatar}
@@ -90,31 +112,27 @@ const Header = ({ title, showIcons }) => {
 
             {showNotifications && (
                 <div className={cl.notificationsPopup}>
-                    <div className={cl.notificationItem}>
-                        <p className={cl.notificationText}>
-                            У вас забронирован коворкинг через 15 минут,
-                            отсканируйте qr-код на входной двери для входа в
-                            аудиторию
-                        </p>
-                        <div className={cl.btn}>
-                            <MyButton onClick={handleScannerRedirect}>
-                                Перейти к сканированию QR-кода
-                            </MyButton>
+                    {nextBooking &&
+                    nextBooking.hasUpcomingBooking &&
+                    nextBooking.minutesUntilStart < 15 ? (
+                        <div className={cl.notificationItem}>
+                            <p className={cl.notificationText}>
+                                У вас скоро начинается бронирование (через{" "}
+                                {nextBooking.minutesUntilStart} минут).
+                            </p>
+                            <div className={cl.btn}>
+                                <MyButton onClick={handleScannerRedirect}>
+                                    Перейти к сканированию
+                                </MyButton>
+                            </div>
                         </div>
-                    </div>
-                    <div className={cl.notificationItem}>
-                        <p className={cl.notificationText}>
-                            У вас забронирован коворкинг через 15 минут,
-                            отсканируйте qr-код на входной двери для входа в
-                            аудиторию
-                        </p>
-                        <div className={cl.btn}>
-                            <MyButton onClick={handleScannerRedirect}>
-                                Перейти к сканированию QR-кода
-                            </MyButton>
+                    ) : (
+                        <div className={cl.notificationItem}>
+                            <p className={cl.notificationText}>
+                                Уведомлений нет
+                            </p>
                         </div>
-                    </div>
-                    {/* Добавьте дополнительные уведомления по необходимости */}
+                    )}
                 </div>
             )}
         </header>
@@ -122,3 +140,5 @@ const Header = ({ title, showIcons }) => {
 };
 
 export default Header;
+
+
