@@ -8,10 +8,20 @@
     padding-top: 64px;
 }
 
+.loader {
+    display: flex;
+    justify-content: center;
+    margin: 80px 100px;
+}
+
 @media (max-width: 1080px) {
     .grid {
         grid-template-columns: repeat(2, 1fr);
         padding: 60px 80px;
+    }
+
+    .loader {
+        margin: 60px 80px;
     }
 }
 
@@ -19,5 +29,9 @@
     .grid {
         grid-template-columns: 1fr;
         padding: 40px 60px;
+    }
+
+    .loader {
+        margin: 40px 60px;
     }
 }

@@ -1,30 +1,40 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/context";
 
-export const AvailabilityCoworkingList = (dateTimeStart, dateTimeEnd, capacity) => {
+export const AvailabilityCoworkingList = (
+    dateTimeStart,
+    dateTimeEnd,
+    capacity
+) => {
     const [availability, setAvailability] = useState([]);
+    const [isLoading, setIsLoading] = useState(false); // Add loading state
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8070/api/main/availability", {
-            method: "POST",
-            headers: {
-                Authorization: `Bearer ${authToken}`,
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                dateTimeStart,
-                dateTimeEnd,
-                capacity,
-            }),
-        })
-            .then((response) => {
+        const fetchAvailability = async () => {
+            setIsLoading(true); // Set loading to true before fetching
+            try {
+                const response = await fetch(
+                    "http://localhost:8070/api/main/availability",
+                    {
+                        method: "POST",
+                        headers: {
+                            Authorization: `Bearer ${authToken}`,
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            dateTimeStart,
+                            dateTimeEnd,
+                            capacity,
+                        }),
+                    }
+                );
+
                 if (!response.ok) {
                     throw new Error("Network response was not ok");
                 }
-                return response.json(); // Parse response as JSON
-            })
-            .then((data) => {
+
+                const data = await response.json(); // Parse response as JSON
                 const updatedAvailability = data.map((coworking) => ({
                     id: coworking.coworkingId,
                     title: coworking.name,
@@ -33,11 +43,15 @@ export const AvailabilityCoworkingList = (dateTimeStart, dateTimeEnd, capacity) 
                     places: coworking.availableCapacity,
                 }));
                 setAvailability(updatedAvailability);
-            })
-            .catch((error) => {
+            } catch (error) {
                 console.error("Error fetching availability:", error);
-            });
+            } finally {
+                setIsLoading(false); // Set loading to false after fetching
+            }
+        };
+
+        fetchAvailability();
     }, [authToken, dateTimeStart, dateTimeEnd, capacity]);
 
-    return availability;
+    return { availability, isLoading }; // Return loading state along with availability
 };
