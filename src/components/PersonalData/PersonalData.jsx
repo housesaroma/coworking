@@ -1,26 +1,28 @@
 import React, { useContext, useEffect, useState } from "react";
-import { userInfo } from "../../api/PersonalData";
+import { useUserInfo } from "../../api/PersonalData";
 import avatar from "../../assets/obabkov.jpg";
 import { AuthContext } from "../../components/context";
 import Avatar from "../Avatar/Avatar";
 import MyField from "../UI/Field/MyField";
+import Loader from "../UI/Loader/Loader";
 import MyRadioButton from "../UI/RadioButton/MyRadioButton";
 import cl from "./PersonalData.module.css";
 
 const PersonalData = () => {
+    const { authToken } = useContext(AuthContext);
     const [data, setData] = useState({
         lastName: "",
         firstName: "",
         middleName: "",
         email: "",
-        password: "qwerty123", // Keep the password unchanged
+        password: "qwerty123",
     });
+    const { fetchUserInfo, isLoading } = useUserInfo(authToken, setData);
 
     const [hasChanges, setHasChanges] = useState(false);
-    const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        userInfo(authToken, setData);
+        fetchUserInfo();
     }, [authToken]);
 
     const handleChange = (e) => {
@@ -42,30 +44,33 @@ const PersonalData = () => {
     return (
         <div>
             <h1 className={cl.title}>Личные данные</h1>
-            <div className={cl.form}>
-                <div className={cl.formGroup}>
-                    {Object.entries(data).map(([key, value]) => (
-                        <MyField
-                            key={key}
-                            type={key === "password" ? "password" : "text"}
-                            name={key}
-                            value={value}
-                            onChange={handleChange}
-                        />
-                    ))}
-                    <div className={cl.save}>
-                        <MyRadioButton
-                            isSelected={hasChanges}
-                            onClick={handleSave}
-                        >
-                            Сохранить
-                        </MyRadioButton>
+            <div className={cl.loader}>{isLoading && <Loader />}</div>
+            {!isLoading && (
+                <div className={cl.form}>
+                    <div className={cl.formGroup}>
+                        {Object.entries(data).map(([key, value]) => (
+                            <MyField
+                                key={key}
+                                type={key === "password" ? "password" : "text"}
+                                name={key}
+                                value={value}
+                                onChange={handleChange}
+                            />
+                        ))}
+                        <div className={cl.save}>
+                            <MyRadioButton
+                                isSelected={hasChanges}
+                                onClick={handleSave}
+                            >
+                                Сохранить
+                            </MyRadioButton>
+                        </div>
+                    </div>
+                    <div className={cl.avatar}>
+                        <Avatar key={1} src={avatar} />
                     </div>
                 </div>
-                <div className={cl.avatar}>
-                    <Avatar key={1} src={avatar} />
-                </div>
-            </div>
+            )}
         </div>
     );
 };
