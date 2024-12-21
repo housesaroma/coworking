@@ -1,16 +1,17 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { CreateBooking } from "../../api/CreateBooking";
+import { reformatDateTime } from "../../utils/format";
 import {
     generateCapacityOptions,
     generateDateOptions,
     generateTimeOptions,
 } from "../../utils/generateOptions";
+import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
 import MyModal from "../UI/MyModal/MyModal";
 import MySelect from "../UI/Select/MySelect";
 import cl from "./BookingFilter.module.css";
-import { reformatDateTime } from "../../utils/format";
-import { AuthContext } from "../context";
-import { CreateBooking } from "../../api/CreateBooking";
 
 const BookingFilter = ({ maxCapacity, title, id }) => {
     const [data, setData] = useState();
@@ -23,6 +24,8 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
 
     const [isModalVisible, setModalVisible] = useState(false);
     const { authToken } = useContext(AuthContext);
+
+    const [redirectToBooking, setRedirectToBooking] = useState(false);
 
     useEffect(() => {
         const generatedDataOptions = generateDateOptions();
@@ -42,6 +45,10 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
             setCapacity(generatedCapacityOptions[0].value);
     }, [maxCapacity]);
 
+    if (redirectToBooking) {
+        return <Navigate to="/booking" state={"Мои бронирования"} />;
+    }
+
     const handleBookingClick = () => {
         setModalVisible(true);
     };
@@ -54,9 +61,15 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
         const { dateTimeStart, dateTimeEnd } = reformatDateTime(data, time);
 
         try {
-            const result = await CreateBooking(authToken, id, dateTimeStart, dateTimeEnd, capacity);
-            console.log("Booking successful:", result);
+            await CreateBooking(
+                authToken,
+                id,
+                dateTimeStart,
+                dateTimeEnd,
+                capacity
+            );
             setModalVisible(false);
+            setRedirectToBooking(true);
         } catch (error) {
             console.error("Error creating booking:", error);
         }

@@ -32,7 +32,6 @@ const BookingFilter = ({ onFilterChange }) => {
         if (dates.length > 0) setData(dates[0].value);
         if (times.length > 0) setTime(times[0].value);
         if (capacities.length > 0) setCapacity(capacities[0].value);
-
     }, []);
 
     const updateTimeOptions = (selectedDate) => {
