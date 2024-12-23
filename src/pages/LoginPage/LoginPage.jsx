@@ -1,26 +1,33 @@
 import React, { useContext, useState } from "react";
 import { Navigate } from "react-router-dom";
+import { useLogin } from "../../api/login.js";
+import visibility from "../../assets/icons/visibility.svg";
+import visibility_off from "../../assets/icons/visibility_off.svg";
 import { AuthContext } from "../../components/context";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
-import { useLogin } from "../../api/login.js";
-import cl from "./LoginPage.module.css";
 import Loader from "../../components/UI/Loader/Loader.jsx";
+import cl from "./LoginPage.module.css";
 
 const LoginPage = () => {
     const { setIsAuth, setAuthToken } = useContext(AuthContext);
     const [showPassword, setShowPassword] = useState(false);
     const [redirectToRegister, setRedirectToRegister] = useState(false);
     const [formData, setFormData] = useState({ email: "", password: "" });
-    const [errorMessage, setErrorMessage] = useState(null);       
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({ ...prevData, [name]: value }));
     };
 
-    const {login, isLoading} = useLogin(formData, setIsAuth, setErrorMessage, setAuthToken);
+    const { login, isLoading } = useLogin(
+        formData,
+        setIsAuth,
+        setErrorMessage,
+        setAuthToken
+    );
 
     const togglePasswordVisibility = () => {
         setShowPassword((prevState) => !prevState);
@@ -57,7 +64,18 @@ const LoginPage = () => {
                                 className={cl.eyeIcon}
                                 onClick={togglePasswordVisibility}
                             >
-                                {showPassword ? "🙈" : "👁️"}
+                                <img
+                                    src={
+                                        showPassword
+                                            ? visibility_off
+                                            : visibility
+                                    }
+                                    alt={
+                                        showPassword
+                                            ? "Hide password"
+                                            : "Show password"
+                                    }
+                                />
                             </span>
                         </div>
                         {isLoading && <Loader />}

@@ -69,7 +69,7 @@
 
 @media (max-width: 1120px) {
     .accordionItem,
-    .titleб,
+    .title,
     .description {
         margin: 32px 80px;
     }

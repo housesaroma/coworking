@@ -42,7 +42,7 @@ const CoworkingDetail = () => {
             </div>
             <div className={cl.description}>
                 <div className={cl.geo}>
-                    <img src={geo} alt="geo" width={"30px"} height={"30px"} />
+                    <img src={geo} alt="geo" />
                     <p>Адрес: Ленина, 66</p>
                 </div>
                 <div className={cl.watch}>
