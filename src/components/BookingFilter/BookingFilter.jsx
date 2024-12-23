@@ -6,6 +6,7 @@ import {
     generateCapacityOptions,
     generateDateOptions,
     generateTimeOptions,
+    generateTimeOptionsToday,
 } from "../../utils/generateOptions";
 import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
@@ -27,9 +28,12 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
 
     const [redirectToBooking, setRedirectToBooking] = useState(false);
 
+    const today = new Date();
+    const currentHour = today.getHours();
+
     useEffect(() => {
         const generatedDataOptions = generateDateOptions();
-        const generatedTimeOptions = generateTimeOptions();
+        const generatedTimeOptions = generateTimeOptionsToday();
         const generatedCapacityOptions = generateCapacityOptions(maxCapacity);
 
         setDataOptions(generatedDataOptions);
@@ -48,6 +52,20 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
     if (redirectToBooking) {
         return <Navigate to="/booking" state={"Мои бронирования"} />;
     }
+
+        const updateTimeOptions = (selectedDate) => {
+            const times =
+                selectedDate === dataOptions[0]?.name && currentHour < 20
+                    ? generateTimeOptionsToday()
+                    : generateTimeOptions();
+            setTimeOptions(times);
+            if (times.length > 0) setTime(times[0].value);
+        };
+    
+        const handleDateChange = (value) => {
+            setData(value);
+            updateTimeOptions(value);
+        };
 
     const handleBookingClick = () => {
         setModalVisible(true);
@@ -82,9 +100,7 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
                     <p className={cl.title}>Дата</p>
                     <MySelect
                         value={data}
-                        onChange={(value) => {
-                            setData(value);
-                        }}
+                        onChange={handleDateChange}
                         defaultValue="Выберите дату"
                         options={dataOptions}
                     />
