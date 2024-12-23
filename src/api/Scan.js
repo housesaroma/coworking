@@ -1,7 +1,9 @@
+import { host } from "./HostConst";
+
 export async function Scan(decodedText) {
     try {
         const response = await fetch(
-            `http://localhost:8070/api/main/door/unlock`,
+            `${host}/api/main/door/unlock`,
             {
                 method: "POST",
                 headers: {

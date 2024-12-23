@@ -1,12 +1,13 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/context";
+import { host } from "./HostConst";
 
 export const CoworkingListToday = () => {
     const [coworkings, setCoworkings] = useState([]);
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8070/api/main/bookings/todayBookings", {
+        fetch(`${host}/api/main/bookings/todayBookings`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${authToken}`,
@@ -38,7 +39,7 @@ export const CoworkingListTomorrow = () => {
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8070/api/main/bookings/tomorrowBookings", {
+        fetch(`${host}/api/main/bookings/tomorrowBookings`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${authToken}`,
@@ -70,7 +71,7 @@ export const CoworkingListWeek = () => {
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8070/api/main/bookings/weekBookings", {
+        fetch(`${host}/api/main/bookings/weekBookings`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${authToken}`,
@@ -102,7 +103,7 @@ export const CoworkingListMonth = () => {
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8070/api/main/bookings/MonthBookings", {
+        fetch(`${host}/api/main/bookings/MonthBookings`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${authToken}`,

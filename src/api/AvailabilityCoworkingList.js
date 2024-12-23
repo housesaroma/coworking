@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/context";
+import { host } from "./HostConst";
 
 export const AvailabilityCoworkingList = (
     dateTimeStart,
@@ -15,7 +16,7 @@ export const AvailabilityCoworkingList = (
             setIsLoading(true); // Set loading to true before fetching
             try {
                 const response = await fetch(
-                    "http://localhost:8070/api/main/availability",
+                    `${host}/api/main/availability`,
                     {
                         method: "POST",
                         headers: {

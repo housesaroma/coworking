@@ -1,3 +1,5 @@
+import { host } from "./HostConst";
+
 export const CreateBooking = async (
     authToken,
     coworkingId,
@@ -7,7 +9,7 @@ export const CreateBooking = async (
 ) => {
     try {
         const response = await fetch(
-            "http://localhost:8070/api/main/bookings/create-booking",
+            `${host}/api/main/bookings/create-booking`,
             {
                 method: "POST",
                 headers: {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { host } from "./HostConst";
 
 export function useUserInfo(authToken, setData) {
     const [isLoading, setIsLoading] = useState(false);
@@ -6,7 +7,8 @@ export function useUserInfo(authToken, setData) {
     const fetchUserInfo = async () => {
         setIsLoading(true); // Set loading to true before fetching
         try {
-            const response = await fetch("http://localhost:8070/api/main/user-info", {
+            // await new Promise(resolve => setTimeout(resolve, 10000));
+            const response = await fetch(`${host}/api/main/user-info`, {
                 method: "GET",
                 headers: {
                     Authorization: `Bearer ${authToken}`,

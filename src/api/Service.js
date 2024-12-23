@@ -1,9 +1,10 @@
 import axios from "axios";
+import { host } from "./HostConst";
 
 export default class Service {
     static async registerUser(email, password, fullName) {
         const response = await axios.post(
-            "http://localhost:8070/api/auth/register",
+            `${host}/api/auth/register`,
             {
                 email: email,
                 password: password,
@@ -21,7 +22,7 @@ export default class Service {
 
     static async loginUser(email, password) {
         const response = await axios.post(
-            "http://localhost:8070/api/auth/login",
+            `${host}/api/auth/login`,
             {
                 email: email,
                 password: password,
