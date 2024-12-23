@@ -103,7 +103,7 @@
     position: absolute; /* Position fixed to overlay content */
     top: 104px; /* Adjust as needed to position below the header */
     right: 0px; /* Adjust as needed to position from the right */
-    background-color: #14191a; /* Match header color */
+    background-color: #7B8A8D; /* Match header color */
     border-radius: 8px; /* Rounded corners */
     z-index: 1000; /* Ensure it appears above other content */
     display: flex;

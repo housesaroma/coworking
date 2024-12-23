@@ -1,11 +1,11 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
+import { getNextBooking } from "../../api/NextBooking";
 import avatar from "../../assets/icons/header/Avatar.jpg";
 import notification from "../../assets/icons/header/IconRingNotification.svg";
 import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
 import cl from "./Header.module.css";
-import { getNextBooking } from "../../api/NextBooking";
 
 const Header = ({ title, showIcons }) => {
     const [redirectToBooking, setRedirectToBooking] = useState(false);
@@ -19,7 +19,11 @@ const Header = ({ title, showIcons }) => {
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        const fetchNextBooking = getNextBooking(authToken, setNextBooking, setHasNewNotifications);
+        const fetchNextBooking = getNextBooking(
+            authToken,
+            setNextBooking,
+            setHasNewNotifications
+        );
 
         fetchNextBooking();
         const intervalId = setInterval(fetchNextBooking, 30000);
@@ -94,7 +98,9 @@ const Header = ({ title, showIcons }) => {
                                     alt="notification"
                                 />
                                 {hasNewNotifications && (
-                                    <span className={cl.notificationBadge}></span>
+                                    <span
+                                        className={cl.notificationBadge}
+                                    ></span>
                                 )}
                             </a>
                         </div>
@@ -140,5 +146,3 @@ const Header = ({ title, showIcons }) => {
 };
 
 export default Header;
-
-

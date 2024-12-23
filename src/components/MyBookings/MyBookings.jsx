@@ -7,8 +7,8 @@ import {
 } from "../../api/MyCoworkingList";
 import arrow from "../../assets/icons/arrow.svg";
 import CoworkingCardTime from "../../components/CoworkingCardTime/CoworkingCardTime";
-import cl from "./MyBookings.module.css";
 import { formatDateTime } from "../../utils/format";
+import cl from "./MyBookings.module.css";
 
 const MyBookings = () => {
     const [expandedSection, setExpandedSection] = useState(null);
@@ -32,6 +32,21 @@ const MyBookings = () => {
                 return coworkingSpacesWeek;
             case "В ближайший месяц":
                 return coworkingSpacesMonth;
+            default:
+                return [];
+        }
+    };
+
+    const getNotCoworkingSpaces = (section) => {
+        switch (section) {
+            case "Сегодня":
+                return "У вас нет бронирований на сегодня.";
+            case "Завтра":
+                return "У вас нет бронирований на завтра.";
+            case "На этой неделе":
+                return "У вас нет бронирований на этой неделе.";
+            case "В ближайший месяц":
+                return "У вас нет бронирований в ближайший месяц.";
             default:
                 return [];
         }
@@ -64,18 +79,28 @@ const MyBookings = () => {
                         </div>
                         {expandedSection === section && (
                             <div className={cl.cardContainer}>
-                                {getCoworkingSpaces(section).map((space, index) => (
-                                    <CoworkingCardTime
-                                        key={index}
-                                        src={space.src}
-                                        title={space.title}
-                                        description={space.description}
-                                        places={space.places}
-                                        subtitle={`Свободных мест осталось: ${space.places}`}
-                                        start={`Начало бронирования: ${formatDateTime(space.start)}`}
-                                        end={`Окончание бронирования: ${formatDateTime(space.end)}`}
-                                    />
-                                ))}
+                                {getCoworkingSpaces(section).length > 0 ? (
+                                    getCoworkingSpaces(section).map(
+                                        (space, index) => (
+                                            <CoworkingCardTime
+                                                key={index}
+                                                src={space.src}
+                                                title={space.title}
+                                                description={space.description}
+                                                places={space.places}
+                                                subtitle={`Свободных мест осталось: ${space.places}`}
+                                                start={`Начало бронирования: ${formatDateTime(
+                                                    space.start
+                                                )}`}
+                                                end={`Окончание бронирования: ${formatDateTime(
+                                                    space.end
+                                                )}`}
+                                            />
+                                        )
+                                    )
+                                ) : (
+                                    <p>{getNotCoworkingSpaces(section)}</p>
+                                )}
                             </div>
                         )}
                     </div>

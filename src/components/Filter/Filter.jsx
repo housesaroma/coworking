@@ -24,7 +24,10 @@ const BookingFilter = ({ onFilterChange }) => {
     useEffect(() => {
         const dates = generateDateOptions();
         const capacities = generateCapacityOptions(30);
-        const times = generateTimeOptionsToday();
+        const times =
+            currentHour < 20
+                ? generateTimeOptionsToday()
+                : generateTimeOptions();
         setTimeOptions(times);
         setDataOptions(dates);
         setCapacityOptions(capacities);

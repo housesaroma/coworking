@@ -33,7 +33,10 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
 
     useEffect(() => {
         const generatedDataOptions = generateDateOptions();
-        const generatedTimeOptions = generateTimeOptionsToday();
+        const generatedTimeOptions =
+            currentHour < 20
+                ? generateTimeOptionsToday()
+                : generateTimeOptions();
         const generatedCapacityOptions = generateCapacityOptions(maxCapacity);
 
         setDataOptions(generatedDataOptions);
@@ -53,19 +56,19 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
         return <Navigate to="/booking" state={"Мои бронирования"} />;
     }
 
-        const updateTimeOptions = (selectedDate) => {
-            const times =
-                selectedDate === dataOptions[0]?.name && currentHour < 20
-                    ? generateTimeOptionsToday()
-                    : generateTimeOptions();
-            setTimeOptions(times);
-            if (times.length > 0) setTime(times[0].value);
-        };
-    
-        const handleDateChange = (value) => {
-            setData(value);
-            updateTimeOptions(value);
-        };
+    const updateTimeOptions = (selectedDate) => {
+        const times =
+            selectedDate === dataOptions[0]?.name && currentHour < 20
+                ? generateTimeOptionsToday()
+                : generateTimeOptions();
+        setTimeOptions(times);
+        if (times.length > 0) setTime(times[0].value);
+    };
+
+    const handleDateChange = (value) => {
+        setData(value);
+        updateTimeOptions(value);
+    };
 
     const handleBookingClick = () => {
         setModalVisible(true);
