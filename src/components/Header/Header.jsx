@@ -14,6 +14,7 @@ const Header = ({ title, showIcons }) => {
     const [showNotifications, setShowNotifications] = useState(false);
     const [nextBooking, setNextBooking] = useState(null);
     const [hasNewNotifications, setHasNewNotifications] = useState(false);
+    const [isHeaderVisible, setIsHeaderVisible] = useState(true);
     const location = useLocation();
 
     const { authToken } = useContext(AuthContext);
@@ -39,6 +40,29 @@ const Header = ({ title, showIcons }) => {
         }
         return () => clearTimeout(timer);
     }, [showNotifications]);
+
+    useEffect(() => {
+        let lastScrollTop = 0;
+        const headerHeight = document.querySelector(
+            `.${cl.header}`
+        ).offsetHeight; // Получаем высоту статичного заголовка
+        const handleScroll = () => {
+            const scrollTop =
+                window.scrollY || document.documentElement.scrollTop;
+            if (scrollTop < headerHeight) {
+                setIsHeaderVisible(false); // Скролл вниз
+            }
+            if (scrollTop > lastScrollTop && scrollTop > headerHeight) {
+                setIsHeaderVisible(false); // Скролл вниз
+            } else {
+                setIsHeaderVisible(true); // Скролл вверх
+            }
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        };
+
+        window.addEventListener("scroll", handleScroll);
+        return () => window.removeEventListener("scroll", handleScroll);
+    }, []);
 
     const handleBookRedirect = () => {
         if (location.pathname !== "/booking") {
@@ -78,70 +102,82 @@ const Header = ({ title, showIcons }) => {
     };
 
     return (
-        <header className={cl.header}>
-            <div className={cl.container}>
-                <div className={cl.left}>
-                    <a href onClick={handleMainRedirect} className={cl.logo}>
-                        B.ERP
-                    </a>
-                    <div className={cl.title}>Бронирование коворкингов</div>
-                    <div className={cl.subtitle}>{title}</div>
-                </div>
-
-                {showIcons && (
-                    <div className={cl.right}>
-                        <div className={cl.notificationWrapper}>
-                            <a href onClick={toggleNotifications}>
-                                <img
-                                    className={cl.notification}
-                                    src={notification}
-                                    alt="notification"
-                                />
-                                {hasNewNotifications && (
-                                    <span
-                                        className={cl.notificationBadge}
-                                    ></span>
-                                )}
-                            </a>
-                        </div>
-                        <a href onClick={handleBookRedirect}>
-                            <img
-                                className={cl.avatar}
-                                src={avatar}
-                                alt="avatar"
-                                style={{ borderRadius: "50%" }}
-                            />
+        <div>
+            {" "}
+            <header className={cl.header}></header>
+            <header
+                className={`${cl.floatingHeader} ${
+                    isHeaderVisible ? "" : cl.hidden
+                }`}
+            >
+                <div className={cl.container}>
+                    <div className={cl.left}>
+                        <a
+                            href
+                            onClick={handleMainRedirect}
+                            className={cl.logo}
+                        >
+                            B.ERP
                         </a>
+                        <div className={cl.title}>Бронирование коворкингов</div>
+                        <div className={cl.subtitle}>{title}</div>
                     </div>
-                )}
-            </div>
 
-            {showNotifications && (
-                <div className={cl.notificationsPopup}>
-                    {nextBooking &&
-                    nextBooking.hasUpcomingBooking &&
-                    nextBooking.minutesUntilStart < 15 ? (
-                        <div className={cl.notificationItem}>
-                            <p className={cl.notificationText}>
-                                У вас скоро начинается бронирование (через{" "}
-                                {nextBooking.minutesUntilStart} минут).
-                            </p>
-                            <div className={cl.btn}>
-                                <MyButton onClick={handleScannerRedirect}>
-                                    Перейти к сканированию
-                                </MyButton>
+                    {showIcons && (
+                        <div className={cl.right}>
+                            <div className={cl.notificationWrapper}>
+                                <a href onClick={toggleNotifications}>
+                                    <img
+                                        className={cl.notification}
+                                        src={notification}
+                                        alt="notification"
+                                    />
+                                    {hasNewNotifications && (
+                                        <span
+                                            className={cl.notificationBadge}
+                                        ></span>
+                                    )}
+                                </a>
                             </div>
-                        </div>
-                    ) : (
-                        <div className={cl.notificationItem}>
-                            <p className={cl.notificationText}>
-                                Уведомлений нет
-                            </p>
+                            <a href onClick={handleBookRedirect}>
+                                <img
+                                    className={cl.avatar}
+                                    src={avatar}
+                                    alt="avatar"
+                                    style={{ borderRadius: "50%" }}
+                                />
+                            </a>
                         </div>
                     )}
                 </div>
-            )}
-        </header>
+
+                {showNotifications && (
+                    <div className={cl.notificationsPopup}>
+                        {nextBooking &&
+                        nextBooking.hasUpcomingBooking &&
+                        nextBooking.minutesUntilStart < 15 ? (
+                            <div className={cl.notificationItem}>
+                                <p className={cl.notificationText}>
+                                    У вас скоро начинается бронирование (через{" "}
+                                    {nextBooking.minutesUntilStart} минут).
+                                </p>
+                                <div className={cl.btn}>
+                                    <MyButton onClick={handleScannerRedirect}>
+                                        Перейти к сканированию
+                                    </MyButton>
+                                </div>
+                            </div>
+                        ) : (
+                            <div className={cl.notificationItem}>
+                                <p className={cl.notificationText}>
+                                    Уведомлений нет
+                                </p>
+                            </div>
+                        )}
+                    </div>
+                )}
+            </header>
+        </div>
     );
 };
 
