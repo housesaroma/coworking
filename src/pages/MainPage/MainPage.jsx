@@ -6,10 +6,7 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import MainPageHead from "../../components/MainPageHead/MainPageHead";
 import Map from "../../components/Map/Map";
-import {
-    firstDateOption,
-    firstTimeOption
-} from "../../utils/generateOptions";
+import { firstDateOption, firstTimeOption } from "../../utils/generateOptions";
 import cl from "./MainPage.module.css";
 
 const MainPage = () => {
