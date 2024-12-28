@@ -1,5 +1,9 @@
 import { default as React, useState } from "react";
 import {
+    getCoworkingSpaces,
+    getNotCoworkingSpaces,
+} from "../../api/CoworkingSpaces";
+import {
     CoworkingListMonth,
     CoworkingListToday,
     CoworkingListTomorrow,
@@ -22,35 +26,13 @@ const MyBookings = () => {
     const coworkingSpacesWeek = CoworkingListWeek();
     const coworkingSpacesMonth = CoworkingListMonth();
 
-    const getCoworkingSpaces = (section) => {
-        switch (section) {
-            case "Сегодня":
-                return coworkingSpacesToday;
-            case "Завтра":
-                return coworkingSpacesTomorrow;
-            case "На этой неделе":
-                return coworkingSpacesWeek;
-            case "В ближайший месяц":
-                return coworkingSpacesMonth;
-            default:
-                return [];
-        }
-    };
-
-    const getNotCoworkingSpaces = (section) => {
-        switch (section) {
-            case "Сегодня":
-                return "У вас нет бронирований на сегодня.";
-            case "Завтра":
-                return "У вас нет бронирований на завтра.";
-            case "На этой неделе":
-                return "У вас нет бронирований на этой неделе.";
-            case "В ближайший месяц":
-                return "У вас нет бронирований в ближайший месяц.";
-            default:
-                return [];
-        }
-    };
+    const coworkingSpaces = getCoworkingSpaces(expandedSection, {
+        coworkingSpacesToday,
+        coworkingSpacesTomorrow,
+        coworkingSpacesWeek,
+        coworkingSpacesMonth,
+    });
+    const notCoworkingSpaces = getNotCoworkingSpaces(expandedSection);
 
     return (
         <div>
@@ -79,27 +61,25 @@ const MyBookings = () => {
                         </div>
                         {expandedSection === section && (
                             <div className={cl.cardContainer}>
-                                {getCoworkingSpaces(section).length > 0 ? (
-                                    getCoworkingSpaces(section).map(
-                                        (space, index) => (
-                                            <CoworkingCardTime
-                                                key={index}
-                                                src={space.src}
-                                                title={space.title}
-                                                description={space.description}
-                                                places={space.places}
-                                                subtitle={`Свободных мест осталось: ${space.places}`}
-                                                start={`Начало бронирования: ${formatDateTime(
-                                                    space.start
-                                                )}`}
-                                                end={`Окончание бронирования: ${formatDateTime(
-                                                    space.end
-                                                )}`}
-                                            />
-                                        )
-                                    )
+                                {coworkingSpaces.length > 0 ? (
+                                    coworkingSpaces.map((space, index) => (
+                                        <CoworkingCardTime
+                                            key={index}
+                                            src={space.src}
+                                            title={space.title}
+                                            description={space.description}
+                                            places={space.places}
+                                            subtitle={`Свободных мест осталось: ${space.places}`}
+                                            start={`Начало бронирования: ${formatDateTime(
+                                                space.start
+                                            )}`}
+                                            end={`Окончание бронирования: ${formatDateTime(
+                                                space.end
+                                            )}`}
+                                        />
+                                    ))
                                 ) : (
-                                    <p>{getNotCoworkingSpaces(section)}</p>
+                                    <p>{notCoworkingSpaces}</p>
                                 )}
                             </div>
                         )}

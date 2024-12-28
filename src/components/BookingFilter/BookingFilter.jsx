@@ -50,7 +50,7 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
             setTime(generatedTimeOptions[0].value);
         if (generatedCapacityOptions.length > 0)
             setCapacity(generatedCapacityOptions[0].value);
-    }, [maxCapacity]);
+    }, [currentHour, maxCapacity]);
 
     if (redirectToBooking) {
         return <Navigate to="/booking" state={"Мои бронирования"} />;

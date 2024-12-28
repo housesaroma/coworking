@@ -111,74 +111,80 @@ const Header = ({ title, showIcons }) => {
                 }`}
             >
                 <div className={cl.container}>
-                    <div className={cl.left}>
-                        <a
-                            href
-                            onClick={handleMainRedirect}
-                            className={cl.logo}
-                        >
-                            B.ERP
-                        </a>
-                        <div className={cl.title}>Бронирование коворкингов</div>
-                        <div className={cl.subtitle}>{title}</div>
-                    </div>
+                    {Left()}
 
-                    {showIcons && (
-                        <div className={cl.right}>
-                            <div className={cl.notificationWrapper}>
-                                <a href onClick={toggleNotifications}>
-                                    <img
-                                        className={cl.notification}
-                                        src={notification}
-                                        alt="notification"
-                                    />
-                                    {hasNewNotifications && (
-                                        <span
-                                            className={cl.notificationBadge}
-                                        ></span>
-                                    )}
-                                </a>
-                            </div>
-                            <a href onClick={handleBookRedirect}>
-                                <img
-                                    className={cl.avatar}
-                                    src={avatar}
-                                    alt="avatar"
-                                    style={{ borderRadius: "50%" }}
-                                />
-                            </a>
-                        </div>
-                    )}
+                    {showIcons && Right()}
                 </div>
 
-                {showNotifications && (
-                    <div className={cl.notificationsPopup}>
-                        {nextBooking &&
-                        nextBooking.hasUpcomingBooking &&
-                        nextBooking.minutesUntilStart < 15 ? (
-                            <div className={cl.notificationItem}>
-                                <p className={cl.notificationText}>
-                                    У вас скоро начинается бронирование (через{" "}
-                                    {nextBooking.minutesUntilStart} минут).
-                                </p>
-                                <div className={cl.btn}>
-                                    <MyButton onClick={handleScannerRedirect}>
-                                        Перейти к сканированию
-                                    </MyButton>
-                                </div>
-                            </div>
-                        ) : (
-                            <div className={cl.notificationItem}>
-                                <p className={cl.notificationText}>
-                                    Уведомлений нет
-                                </p>
-                            </div>
-                        )}
-                    </div>
-                )}
+                {showNotifications && Notifications()}
             </header>
         </div>
     );
+
+    function Left() {
+        return (
+            <div className={cl.left}>
+                <a href onClick={handleMainRedirect} className={cl.logo}>
+                    B.ERP
+                </a>
+                <div className={cl.title}>Бронирование коворкингов</div>
+                <div className={cl.subtitle}>{title}</div>
+            </div>
+        );
+    }
+
+    function Right() {
+        return (
+            <div className={cl.right}>
+                <div className={cl.notificationWrapper}>
+                    <a href onClick={toggleNotifications}>
+                        <img
+                            className={cl.notification}
+                            src={notification}
+                            alt="notification"
+                        />
+                        {hasNewNotifications && (
+                            <span className={cl.notificationBadge}></span>
+                        )}
+                    </a>
+                </div>
+                <a href onClick={handleBookRedirect}>
+                    <img
+                        className={cl.avatar}
+                        src={avatar}
+                        alt="avatar"
+                        style={{ borderRadius: "50%" }}
+                    />
+                </a>
+            </div>
+        );
+    }
+
+    function Notifications() {
+        return (
+            <div className={cl.notificationsPopup}>
+                {nextBooking &&
+                nextBooking.hasUpcomingBooking &&
+                nextBooking.minutesUntilStart < 15 ? (
+                    <div className={cl.notificationItem}>
+                        <p className={cl.notificationText}>
+                            У вас скоро начинается бронирование (через{" "}
+                            {nextBooking.minutesUntilStart} минут).
+                        </p>
+                        <div className={cl.btn}>
+                            <MyButton onClick={handleScannerRedirect}>
+                                Перейти к сканированию
+                            </MyButton>
+                        </div>
+                    </div>
+                ) : (
+                    <div className={cl.notificationItem}>
+                        <p className={cl.notificationText}>Уведомлений нет</p>
+                    </div>
+                )}
+            </div>
+        );
+    }
 };
 
 export default Header;

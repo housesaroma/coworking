@@ -1,4 +1,5 @@
 import React from "react";
+import { formatTimeRange } from "../../../utils/format";
 import MyButton from "../Button/MyButton";
 import cl from "./MyModal.module.css";
 
@@ -12,12 +13,6 @@ const MyModal = ({
     title,
 }) => {
     if (!isVisible) return null;
-
-    const formatTimeRange = (hour) => {
-        const startHour = parseInt(hour, 10);
-        const endHour = (startHour + 1) % 24; // Ensure it wraps around after 23
-        return `${startHour}:00-${endHour}:00`;
-    };
 
     return (
         <div className={cl.modalOverlay}>
