@@ -1,17 +1,22 @@
 import React, { useState } from "react";
+import {
+    CoworkingListCancelled,
+    CoworkingListFinished,
+} from "../../api/MyCoworkingList";
 import arrow from "../../assets/icons/arrow.svg";
-import CoworkingCard from "../../components/CoworkingCard/CoworkingCard";
+import CoworkingCardTime from "../../components/CoworkingCardTime/CoworkingCardTime";
+import { formatDateTime } from "../../utils/format";
 import cl from "./MyHistory.module.css";
-import CoworkingList, { coworkings } from "../../utils/coworkings";
 
 const MyHistory = () => {
     const [expandedSection, setExpandedSection] = useState(null);
 
-    const coworkingSpaces = coworkings;
-
     const toggleSection = (section) => {
         setExpandedSection(expandedSection === section ? null : section);
     };
+
+    const coworkingSpacesCancelled = CoworkingListCancelled();
+    const coworkingSpacesFinished = CoworkingListFinished();
 
     return (
         <div>
@@ -36,14 +41,23 @@ const MyHistory = () => {
                             </div>
                             {expandedSection === section && (
                                 <div className={cl.cardContainer}>
-                                    {coworkingSpaces.map((space, index) => (
-                                        <CoworkingCard
+                                    {(section === "Успешные бронирования"
+                                        ? coworkingSpacesFinished
+                                        : coworkingSpacesCancelled
+                                    ).map((space, index) => (
+                                        <CoworkingCardTime
                                             key={index}
                                             src={space.src}
                                             title={space.title}
                                             description={space.description}
                                             places={space.places}
                                             subtitle={`Свободных мест осталось: ${space.places}`}
+                                            start={`Начало бронирования: ${formatDateTime(
+                                                space.start
+                                            )}`}
+                                            end={`Окончание бронирования: ${formatDateTime(
+                                                space.end
+                                            )}`}
                                         />
                                     ))}
                                 </div>

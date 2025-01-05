@@ -129,3 +129,67 @@ export const CoworkingListMonth = () => {
     }, [authToken]);
     return coworkings;
 };
+
+export const CoworkingListFinished = () => {
+    const [coworkings, setCoworkings] = useState([]);
+    const { authToken } = useContext(AuthContext);
+
+    useEffect(() => {
+        fetch(`${host}/api/main/bookings/finishedBookings`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const updatedCoworkings = data.map((booking) => ({
+                    id: booking.coworking.coworkingId,
+                    title: booking.coworking.name,
+                    description: booking.coworking.description,
+                    src: booking.coworking.mainPhoto,
+                    places: booking.coworking.totalCapacity,
+                    start: booking.bookingDateStart,
+                    end: booking.bookingDateEnd,
+                }));
+                setCoworkings(updatedCoworkings);
+            })
+            .catch((error) =>
+                console.error("Error fetching coworkings:", error)
+            );
+    }, [authToken]);
+    return coworkings;
+};
+
+export const CoworkingListCancelled = () => {
+    const [coworkings, setCoworkings] = useState([]);
+    const { authToken } = useContext(AuthContext);
+
+    useEffect(() => {
+        fetch(`${host}/api/main/bookings/cancelledBookings`, {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${authToken}`,
+                "Content-Type": "application/json",
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                const updatedCoworkings = data.map((booking) => ({
+                    id: booking.coworking.coworkingId,
+                    title: booking.coworking.name,
+                    description: booking.coworking.description,
+                    src: booking.coworking.mainPhoto,
+                    places: booking.coworking.totalCapacity,
+                    start: booking.bookingDateStart,
+                    end: booking.bookingDateEnd,
+                }));
+                setCoworkings(updatedCoworkings);
+            })
+            .catch((error) =>
+                console.error("Error fetching coworkings:", error)
+            );
+    }, [authToken]);
+    return coworkings;
+};
