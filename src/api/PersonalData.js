@@ -27,7 +27,8 @@ export function useUserInfo(authToken, setData) {
                 firstName: firstName || "",
                 middleName: middleName || "",
                 email: userInfo.username,
-                password: "qwerty123", // Keep the password unchanged
+                // password: "qwerty123", Keep the password unchanged 
+                photoUrl: userInfo.photoUrl
             });
         } catch (error) {
             console.error("Error fetching user info:", error);

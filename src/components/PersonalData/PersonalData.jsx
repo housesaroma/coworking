@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useUserInfo } from "../../api/PersonalData";
-import avatar from "../../assets/obabkov.jpg";
+import { ChangePersonalData } from "../../api/ChangePersonalData";
 import { AuthContext } from "../../components/context";
 import Avatar from "../Avatar/Avatar";
 import MyField from "../UI/Field/MyField";
@@ -15,7 +15,7 @@ const PersonalData = () => {
         firstName: "",
         middleName: "",
         email: "",
-        password: "qwerty123",
+        photoUrl: null,
     });
     const { fetchUserInfo, isLoading } = useUserInfo(authToken, setData);
 
@@ -34,10 +34,25 @@ const PersonalData = () => {
         });
     };
 
-    const handleSave = () => {
+    const handleSave = async () => {
         if (hasChanges) {
-            console.log("Changes saved!");
-            setHasChanges(false);
+            try {
+                // Формируем полное имя из компонентов
+                const fullName =
+                    `${data.lastName} ${data.firstName} ${data.middleName}`.trim();
+
+                // Вызываем функцию изменения данных
+                await ChangePersonalData(
+                    authToken,
+                    fullName,
+                    data.email, // используем email как username
+                );
+
+                console.log("Changes saved successfully!");
+                setHasChanges(false);
+            } catch (error) {
+                console.error("Error saving changes:", error);
+            }
         }
     };
 
@@ -48,15 +63,19 @@ const PersonalData = () => {
             {!isLoading && (
                 <div className={cl.form}>
                     <div className={cl.formGroup}>
-                        {Object.entries(data).map(([key, value]) => (
-                            <MyField
-                                key={key}
-                                type={key === "password" ? "password" : "text"}
-                                name={key}
-                                value={value}
-                                onChange={handleChange}
-                            />
-                        ))}
+                        {Object.entries(data)
+                            .filter(([key]) => !["photoUrl"].includes(key)) // Исключаем photoUrl из полей ввода
+                            .map(([key, value]) => (
+                                <MyField
+                                    key={key}
+                                    // type={
+                                    //     key === "password" ? "password" : "text"
+                                    // }
+                                    name={key}
+                                    value={value}
+                                    onChange={handleChange}
+                                />
+                            ))}
                         <div className={cl.save}>
                             <MyRadioButton
                                 isSelected={hasChanges}
@@ -67,7 +86,7 @@ const PersonalData = () => {
                         </div>
                     </div>
                     <div className={cl.avatar}>
-                        <Avatar key={1} src={avatar} />
+                        <Avatar key={1} src={data.photoUrl} />
                     </div>
                 </div>
             )}

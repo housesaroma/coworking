@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 import { getNextBooking } from "../../api/NextBooking";
 import avatar from "../../assets/icons/header/Avatar.jpg";
+import { useUserInfo } from "../../api/PersonalData"; // Добавляем импорт useUserInfo
 import notification from "../../assets/icons/header/IconRingNotification.svg";
 import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
@@ -15,9 +16,16 @@ const Header = ({ title, showIcons }) => {
     const [nextBooking, setNextBooking] = useState(null);
     const [hasNewNotifications, setHasNewNotifications] = useState(false);
     const [isHeaderVisible, setIsHeaderVisible] = useState(true);
+    const [userData, setUserData] = useState({ photoUrl: null });
     const location = useLocation();
 
     const { authToken } = useContext(AuthContext);
+
+    const { fetchUserInfo } = useUserInfo(authToken, setUserData);
+
+    useEffect(() => {
+        fetchUserInfo(); // Загружаем данные пользователя при монтировании
+    }, [authToken]);
 
     useEffect(() => {
         const fetchNextBooking = getNextBooking(
@@ -30,6 +38,8 @@ const Header = ({ title, showIcons }) => {
         const intervalId = setInterval(fetchNextBooking, 30000);
         return () => clearInterval(intervalId);
     }, [authToken]);
+
+    
 
     useEffect(() => {
         let timer;
@@ -151,9 +161,12 @@ const Header = ({ title, showIcons }) => {
                 <a href onClick={handleBookRedirect}>
                     <img
                         className={cl.avatar}
-                        src={avatar}
+                        src={userData.photoUrl || avatar}
                         alt="avatar"
                         style={{ borderRadius: "50%" }}
+                        onError={(e) => {
+                            e.target.src = avatar; // Если ошибка загрузки, используем дефолтный аватар
+                        }}
                     />
                 </a>
             </div>
