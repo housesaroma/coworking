@@ -2,7 +2,7 @@ import React, { useState, useRef, useContext } from "react"; // Добавляе
 import { AuthContext } from "../../components/context"; // Импортируем AuthContext
 import cl from "./Avatar.module.css";
 import { uploadPhoto } from "../../api/ChangeAvatar";
-import avatar from "../../../src/assets/obabkov.jpg";
+import avatar from "../../../src/assets/Avatar.jpg";
 
 const Avatar = ({ src, onPhotoUpdate }) => {
     const [imageSrc, setImageSrc] = useState(src);
