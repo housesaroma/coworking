@@ -1,26 +1,22 @@
 import { host } from "./HostConst";
 
-export const CreateBooking = async (
+export const ChangePersonalData = async (
     authToken,
-    coworkingId,
-    startTime,
-    endTime,
-    capacity
+    fullName,
+    username,
 ) => {
     try {
         const response = await fetch(
-            `${host}/api/main/bookings/create-booking`,
+            `${host}/api/main/update-user-info`,
             {
-                method: "POST",
+                method: "PUT",
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    coworkingId,
-                    startTime,
-                    endTime,
-                    capacity,
+                    fullName,
+                    username,
                 }),
             }
         );
@@ -30,8 +26,8 @@ export const CreateBooking = async (
         }
 
         const result = await response.text();
-        console.log("Booking successful:", result);
+        console.log("Successful:", result);
     } catch (error) {
-        console.error("Error creating booking:", error);
+        console.error("Error changing personal data:", error);
     }
 };

@@ -6,10 +6,15 @@ import Footer from "../../components/Footer/Footer";
 import Header from "../../components/Header/Header";
 import MainPageHead from "../../components/MainPageHead/MainPageHead";
 import Map from "../../components/Map/Map";
+import { firstDateOption, firstTimeOption } from "../../utils/generateOptions";
 import cl from "./MainPage.module.css";
 
 const MainPage = () => {
-    const [filterData, setFilterData] = useState({ capacity: null, date: null, time: null });
+    const [filterData, setFilterData] = useState({
+        capacity: 1,
+        date: firstDateOption(),
+        time: firstTimeOption(),
+    });
 
     return (
         <div>

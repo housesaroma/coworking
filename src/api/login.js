@@ -1,7 +1,12 @@
 import { useState } from "react";
 import Service from "./Service";
 
-export const useLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => {
+export const useLogin = (
+    formData,
+    setIsAuth,
+    setErrorMessage,
+    setAuthToken
+) => {
     const [isLoading, setIsLoading] = useState(false);
 
     const login = async (event) => {
@@ -41,6 +46,6 @@ export const useLogin = (formData, setIsAuth, setErrorMessage, setAuthToken) => 
         } finally {
             setIsLoading(false);
         }
-    }; 
+    };
     return { login, isLoading };
 };

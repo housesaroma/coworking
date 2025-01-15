@@ -34,3 +34,9 @@ export const formatDateTime = (isoString) => {
     };
     return date.toLocaleString('ru-RU', options);
 };
+
+export const formatTimeRange = (hour) => {
+    const startHour = parseInt(hour, 10);
+    const endHour = (startHour + 1) % 24; // Ensure it wraps around after 23
+    return `${startHour}:00-${endHour}:00`;
+};

@@ -1,11 +1,13 @@
 import { Html5Qrcode } from "html5-qrcode";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { Scan } from "../../api/Scan";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
-import { Scan } from "../../api/Scan";
+import { AuthContext } from "../../components/context";
 import cl from "./ScannerPage.module.css";
 
 const ScannerPage = () => {
+    const { authToken } = useContext(AuthContext);
     const [scanResult, setScanResult] = useState(null);
     const [isScanning, setIsScanning] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
@@ -46,11 +48,13 @@ const ScannerPage = () => {
                 config,
                 async (decodedText) => {
                     try {
-                        await Scan(decodedText);
+                        await Scan(decodedText, authToken);
                         setScanResult(decodedText);
                         setErrorMessage(null); // Очистите сообщение об ошибке при успешном сканировании
                     } catch (error) {
-                        setErrorMessage("Произошла ошибка при сканировании");
+                        setErrorMessage(
+                            `Произошла ошибка при сканировании: ${error}`
+                        );
                         stopScanning(); // Остановите сканирование при ошибке
                     }
                 }

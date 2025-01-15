@@ -1,3 +1,17 @@
+export const firstDateOption = () => {
+    return generateDateOptions()[0].value;
+};
+
+export const firstTimeOption = () => {
+    const today = new Date();
+    const currentHour = today.getHours();
+
+    if (currentHour < 20) {
+        return generateTimeOptionsToday()[0].value;
+    }
+    return generateTimeOptions()[0].value;
+};
+
 export const generateDateOptions = () => {
     const options = [];
     const today = new Date();

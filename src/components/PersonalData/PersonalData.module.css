@@ -32,16 +32,27 @@
     width: 50vw;
 }
 
-.save{
+.save {
     margin: 24px 100px;
+}
+
+.loader {
+    display: flex;
+    justify-content: center;
+    margin: 80px 100px;
 }
 
 @media (max-width: 1120px) {
     .avatar {
         margin-right: 80px;
     }
-    .title, .save{
+    .title,
+    .save {
         margin: 32px 80px;
+    }
+
+    .loader {
+        margin: 60px 80px;
     }
 }
 
@@ -53,7 +64,11 @@
         margin-left: 32px;
         order: -1;
     }
-    .title, .save {
+    .title,
+    .save {
         margin: 32px;
+    }
+    .loader {
+        margin: 40px 60px;
     }
 }

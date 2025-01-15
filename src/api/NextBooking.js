@@ -1,6 +1,8 @@
+import { host } from "./HostConst";
+
 export function getNextBooking(authToken, setNextBooking, setHasNewNotifications) {
     return () => {
-        fetch("http://localhost:8070/api/main/bookings/next-booking", {
+        fetch(`${host}/api/main/bookings/next-booking`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${authToken}`,

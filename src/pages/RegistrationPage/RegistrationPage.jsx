@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Navigate } from "react-router-dom";
 import { useRegister } from "../../api/register.js";
+import visibility from "../../assets/icons/visibility.svg";
+import visibility_off from "../../assets/icons/visibility_off.svg";
 import Header from "../../components/Header/Header";
 import MyButton from "../../components/UI/Button/MyButton";
 import MyInput from "../../components/UI/Input/MyInput";
@@ -22,7 +24,11 @@ const RegistrationPage = () => {
     const [errorMessage, setErrorMessage] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
 
-    const { register, isLoading } = useRegister(formData, setErrorMessage, setSuccessMessage);
+    const { register, isLoading } = useRegister(
+        formData,
+        setErrorMessage,
+        setSuccessMessage
+    );
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -88,7 +94,18 @@ const RegistrationPage = () => {
                                 className={cl.eyeIcon}
                                 onClick={togglePasswordVisibility}
                             >
-                                {showPassword ? "🙈" : "👁️"}
+                                <img
+                                    src={
+                                        showPassword
+                                            ? visibility_off
+                                            : visibility
+                                    }
+                                    alt={
+                                        showPassword
+                                            ? "Hide password"
+                                            : "Show password"
+                                    }
+                                />
                             </span>
                         </div>
                         <MyInput

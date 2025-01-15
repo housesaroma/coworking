@@ -1,5 +1,9 @@
 import { default as React, useState } from "react";
 import {
+    getCoworkingSpaces,
+    getNotCoworkingSpaces,
+} from "../../api/CoworkingSpaces";
+import {
     CoworkingListMonth,
     CoworkingListToday,
     CoworkingListTomorrow,
@@ -7,8 +11,8 @@ import {
 } from "../../api/MyCoworkingList";
 import arrow from "../../assets/icons/arrow.svg";
 import CoworkingCardTime from "../../components/CoworkingCardTime/CoworkingCardTime";
-import cl from "./MyBookings.module.css";
 import { formatDateTime } from "../../utils/format";
+import cl from "./MyBookings.module.css";
 
 const MyBookings = () => {
     const [expandedSection, setExpandedSection] = useState(null);
@@ -22,20 +26,13 @@ const MyBookings = () => {
     const coworkingSpacesWeek = CoworkingListWeek();
     const coworkingSpacesMonth = CoworkingListMonth();
 
-    const getCoworkingSpaces = (section) => {
-        switch (section) {
-            case "Сегодня":
-                return coworkingSpacesToday;
-            case "Завтра":
-                return coworkingSpacesTomorrow;
-            case "На этой неделе":
-                return coworkingSpacesWeek;
-            case "В ближайший месяц":
-                return coworkingSpacesMonth;
-            default:
-                return [];
-        }
-    };
+    const coworkingSpaces = getCoworkingSpaces(expandedSection, {
+        coworkingSpacesToday,
+        coworkingSpacesTomorrow,
+        coworkingSpacesWeek,
+        coworkingSpacesMonth,
+    });
+    const notCoworkingSpaces = getNotCoworkingSpaces(expandedSection);
 
     return (
         <div>
@@ -64,18 +61,26 @@ const MyBookings = () => {
                         </div>
                         {expandedSection === section && (
                             <div className={cl.cardContainer}>
-                                {getCoworkingSpaces(section).map((space, index) => (
-                                    <CoworkingCardTime
-                                        key={index}
-                                        src={space.src}
-                                        title={space.title}
-                                        description={space.description}
-                                        places={space.places}
-                                        subtitle={`Свободных мест осталось: ${space.places}`}
-                                        start={`Начало бронирования: ${formatDateTime(space.start)}`}
-                                        end={`Окончание бронирования: ${formatDateTime(space.end)}`}
-                                    />
-                                ))}
+                                {coworkingSpaces.length > 0 ? (
+                                    coworkingSpaces.map((space, index) => (
+                                        <CoworkingCardTime
+                                            key={index}
+                                            src={space.src}
+                                            title={space.title}
+                                            description={space.description}
+                                            places={space.places}
+                                            subtitle={`Свободных мест осталось: ${space.places}`}
+                                            start={`Начало бронирования: ${formatDateTime(
+                                                space.start
+                                            )}`}
+                                            end={`Окончание бронирования: ${formatDateTime(
+                                                space.end
+                                            )}`}
+                                        />
+                                    ))
+                                ) : (
+                                    <p>{notCoworkingSpaces}</p>
+                                )}
                             </div>
                         )}
                     </div>

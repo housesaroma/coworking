@@ -1,16 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
+import { CreateBooking } from "../../api/CreateBooking";
+import { reformatDateTime } from "../../utils/format";
 import {
     generateCapacityOptions,
     generateDateOptions,
     generateTimeOptions,
+    generateTimeOptionsToday,
 } from "../../utils/generateOptions";
+import { AuthContext } from "../context";
 import MyButton from "../UI/Button/MyButton";
 import MyModal from "../UI/MyModal/MyModal";
 import MySelect from "../UI/Select/MySelect";
 import cl from "./BookingFilter.module.css";
-import { reformatDateTime } from "../../utils/format";
-import { AuthContext } from "../context";
-import { CreateBooking } from "../../api/CreateBooking";
 
 const BookingFilter = ({ maxCapacity, title, id }) => {
     const [data, setData] = useState();
@@ -24,9 +26,17 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
     const [isModalVisible, setModalVisible] = useState(false);
     const { authToken } = useContext(AuthContext);
 
+    const [redirectToBooking, setRedirectToBooking] = useState(false);
+
+    const today = new Date();
+    const currentHour = today.getHours();
+
     useEffect(() => {
         const generatedDataOptions = generateDateOptions();
-        const generatedTimeOptions = generateTimeOptions();
+        const generatedTimeOptions =
+            currentHour < 20
+                ? generateTimeOptionsToday()
+                : generateTimeOptions();
         const generatedCapacityOptions = generateCapacityOptions(maxCapacity);
 
         setDataOptions(generatedDataOptions);
@@ -40,7 +50,25 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
             setTime(generatedTimeOptions[0].value);
         if (generatedCapacityOptions.length > 0)
             setCapacity(generatedCapacityOptions[0].value);
-    }, [maxCapacity]);
+    }, [currentHour, maxCapacity]);
+
+    if (redirectToBooking) {
+        return <Navigate to="/booking" state={"Мои бронирования"} />;
+    }
+
+    const updateTimeOptions = (selectedDate) => {
+        const times =
+            selectedDate === dataOptions[0]?.name && currentHour < 20
+                ? generateTimeOptionsToday()
+                : generateTimeOptions();
+        setTimeOptions(times);
+        if (times.length > 0) setTime(times[0].value);
+    };
+
+    const handleDateChange = (value) => {
+        setData(value);
+        updateTimeOptions(value);
+    };
 
     const handleBookingClick = () => {
         setModalVisible(true);
@@ -54,9 +82,15 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
         const { dateTimeStart, dateTimeEnd } = reformatDateTime(data, time);
 
         try {
-            const result = await CreateBooking(authToken, id, dateTimeStart, dateTimeEnd, capacity);
-            console.log("Booking successful:", result);
+            await CreateBooking(
+                authToken,
+                id,
+                dateTimeStart,
+                dateTimeEnd,
+                capacity
+            );
             setModalVisible(false);
+            setRedirectToBooking(true);
         } catch (error) {
             console.error("Error creating booking:", error);
         }
@@ -69,9 +103,7 @@ const BookingFilter = ({ maxCapacity, title, id }) => {
                     <p className={cl.title}>Дата</p>
                     <MySelect
                         value={data}
-                        onChange={(value) => {
-                            setData(value);
-                        }}
+                        onChange={handleDateChange}
                         defaultValue="Выберите дату"
                         options={dataOptions}
                     />

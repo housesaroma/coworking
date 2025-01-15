@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/context";
+import { host } from "./HostConst";
 
 
 export const CoworkingList = () => {
@@ -7,7 +8,7 @@ export const CoworkingList = () => {
     const { authToken } = useContext(AuthContext);
 
     useEffect(() => {
-        fetch("http://localhost:8070/api/main/", {
+        fetch(`${host}/api/main/`, {
             method: "GET",
             headers: {
                 Authorization: `Bearer ${authToken}`,

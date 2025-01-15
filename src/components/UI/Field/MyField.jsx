@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import cl from "./MyField.module.css";
-import pencil from '../../../assets/icons/pencil.svg';
+import pencil from "../../../assets/icons/pencil.svg";
 
 const MyField = React.forwardRef((props, ref) => {
     const [isEditing, setIsEditing] = useState(false);
@@ -8,6 +8,7 @@ const MyField = React.forwardRef((props, ref) => {
     const handleEditClick = () => {
         setIsEditing(!isEditing);
     };
+
 
     return (
         <div className={cl.fieldContainer}>
