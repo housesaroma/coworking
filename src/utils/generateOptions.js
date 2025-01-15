@@ -38,13 +38,23 @@ export const generateDateOptions = () => {
 export const generateTimeOptionsToday = () => {
     const options = [];
     const startHour = 7; // Начало с 7:00
-    const endHour = 20; // До 20:00
+    const endHour = 19; // До 20:00
     const currentHour = new Date().getHours();
 
     for (let hour = startHour; hour < endHour; hour++) {
-        if (hour > currentHour) {
-            const timeString = `${hour}:00 - ${hour + 1}:00`;
-            options.push({ value: `${hour}:00`, name: timeString });
+        for (let minutes = 0; minutes < 60; minutes += 15) {
+            const startTime = `${hour}:${minutes.toString().padStart(2, "0")}`;
+            const endTime = `${hour + 1}:${minutes
+                .toString()
+                .padStart(2, "0")}`;
+
+            if (
+                hour > currentHour ||
+                (hour === currentHour && minutes > new Date().getMinutes())
+            ) {
+                const timeString = `${startTime} - ${endTime}`;
+                options.push({ value: startTime, name: timeString });
+            }
         }
     }
 
@@ -54,10 +64,18 @@ export const generateTimeOptionsToday = () => {
 export const generateTimeOptions = () => {
     const options = [];
     const startHour = 7; // Начало с 7:00
-    const endHour = 20; // До 20:00
+    const endHour = 19; // До 20:00
+
     for (let hour = startHour; hour < endHour; hour++) {
-        const timeString = `${hour}:00 - ${hour + 1}:00`;
-        options.push({ value: `${hour}:00`, name: timeString });
+        for (let minutes = 0; minutes < 60; minutes += 15) {
+            const startTime = `${hour}:${minutes.toString().padStart(2, "0")}`;
+            const endTime = `${hour + 1}:${minutes
+                .toString()
+                .padStart(2, "0")}`;
+
+            const timeString = `${startTime} - ${endTime}`;
+            options.push({ value: startTime, name: timeString });
+        }
     }
 
     return options;
