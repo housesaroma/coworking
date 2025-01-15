@@ -1,3 +1,4 @@
+import { host } from "./HostConst";
 
 export const uploadPhoto = async (file, onPhotoUpdate, authToken) => {
     try {
@@ -5,7 +6,7 @@ export const uploadPhoto = async (file, onPhotoUpdate, authToken) => {
         formData.append("file", file);
 
         const response = await fetch(
-            "http://localhost:8070/api/main/upload-user-photo",
+            `${host}/api/main/upload-user-photo`,
             {
                 method: "POST",
                 headers: {
